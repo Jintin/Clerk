@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Clerk Sample</string>
+
+    <string name="hint_channel">Type Channel</string>
+    <string name="hint_log">Type Log</string>
+    <string name="send_log">Send Log</string>
+</resources>
