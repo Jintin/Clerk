@@ -10,11 +10,8 @@ import javax.inject.Singleton
 
 @Module
 class RoomModule(application: Application) {
-    private var database: ClerkLogDatabase
-
-    init {
-        database = Room.databaseBuilder(application, ClerkLogDatabase::class.java, "log-db").build()
-    }
+    private var database: ClerkLogDatabase =
+        Room.databaseBuilder(application, ClerkLogDatabase::class.java, "log-db").build()
 
     @Singleton
     @Provides

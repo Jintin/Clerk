@@ -30,16 +30,22 @@ class LogListAdapter : RecyclerView.Adapter<LogViewHolder>() {
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
-        holder.bind(list.get(position))
+        holder.bind(list[position])
     }
 }
 
 class LogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val channelView = itemView.channelView
-    val textView = itemView.textView
+    private val channelView = itemView.channelView
+    private val textView = itemView.textView
 
     fun bind(clerkLog: ClerkLog) {
-        channelView.text = clerkLog.channel
+        if (clerkLog.channel.isEmpty()) {
+            channelView.visibility = View.GONE
+        } else {
+            channelView.text = clerkLog.channel
+            channelView.visibility = View.VISIBLE
+        }
+
         textView.text = clerkLog.log
     }
 }

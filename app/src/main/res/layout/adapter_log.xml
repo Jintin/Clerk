@@ -8,12 +8,12 @@
             android:id="@+id/channelView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingEnd="8dp"
             android:textColor="@color/logText"
             tools:text="TAG"/>
     <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:paddingStart="@dimen/basic_margin"
             tools:text="VALUE"
             android:textColor="@color/logText"
             android:layout_height="wrap_content"/>
