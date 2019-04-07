@@ -1,4 +1,4 @@
-package com.jintin.clerk.obj
+package com.jintin.clerk.app.obj
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

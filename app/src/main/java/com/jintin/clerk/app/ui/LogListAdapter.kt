@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jintin.clerk.R
-import com.jintin.clerk.obj.ClerkLog
+import com.jintin.clerk.app.R
+import com.jintin.clerk.app.obj.ClerkLog
 import kotlinx.android.synthetic.main.adapter_log.view.*
 
 class LogListAdapter : RecyclerView.Adapter<LogViewHolder>() {

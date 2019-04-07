@@ -2,9 +2,9 @@ package com.jintin.clerk.app
 
 import android.app.IntentService
 import android.content.Intent
-import com.jintin.clerk.dagger.component.ServiceComponent
-import com.jintin.clerk.obj.ClerkLog
-import com.jintin.clerk.repository.LogRepository
+import com.jintin.clerk.app.dagger.component.ServiceComponent
+import com.jintin.clerk.app.obj.ClerkLog
+import com.jintin.clerk.app.repository.LogRepository
 import javax.inject.Inject
 
 class LogService : IntentService("log") {

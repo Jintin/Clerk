@@ -1,9 +1,9 @@
-package com.jintin.clerk.dagger.component
+package com.jintin.clerk.app.dagger.component
 
 import com.jintin.clerk.app.ClerkApp
+import com.jintin.clerk.app.dagger.module.ViewerModule
+import com.jintin.clerk.app.obj.ClerkLogDao
 import com.jintin.clerk.app.ui.LogListFragment
-import com.jintin.clerk.dagger.module.ViewerModule
-import com.jintin.clerk.obj.ClerkLogDao
 import dagger.Subcomponent
 
 @LogScope

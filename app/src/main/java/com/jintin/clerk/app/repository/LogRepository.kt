@@ -1,7 +1,7 @@
-package com.jintin.clerk.repository
+package com.jintin.clerk.app.repository
 
 import androidx.lifecycle.LiveData
-import com.jintin.clerk.obj.ClerkLog
+import com.jintin.clerk.app.obj.ClerkLog
 
 interface LogRepository {
 

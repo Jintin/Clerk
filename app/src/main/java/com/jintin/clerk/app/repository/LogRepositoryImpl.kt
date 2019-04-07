@@ -1,8 +1,8 @@
-package com.jintin.clerk.repository
+package com.jintin.clerk.app.repository
 
 import androidx.lifecycle.LiveData
-import com.jintin.clerk.obj.ClerkLog
-import com.jintin.clerk.obj.ClerkLogDao
+import com.jintin.clerk.app.obj.ClerkLog
+import com.jintin.clerk.app.obj.ClerkLogDao
 import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

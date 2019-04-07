@@ -2,7 +2,7 @@ package com.jintin.clerk.app.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.jintin.clerk.R
+import com.jintin.clerk.app.R
 
 class MainActivity : AppCompatActivity() {
 

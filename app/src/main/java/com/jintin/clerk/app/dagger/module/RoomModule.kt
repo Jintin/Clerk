@@ -1,9 +1,9 @@
-package com.jintin.clerk.dagger.module
+package com.jintin.clerk.app.dagger.module
 
 import android.app.Application
 import androidx.room.Room
-import com.jintin.clerk.obj.ClerkLogDao
-import com.jintin.clerk.obj.ClerkLogDatabase
+import com.jintin.clerk.app.obj.ClerkLogDao
+import com.jintin.clerk.app.obj.ClerkLogDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -1,4 +1,4 @@
-package com.jintin.clerk.dagger.component
+package com.jintin.clerk.app.dagger.component
 
 import javax.inject.Scope
 

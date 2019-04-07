@@ -7,10 +7,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jintin.clerk.R
-import com.jintin.clerk.dagger.component.ViewerComponent
-import com.jintin.clerk.obj.ClerkLog
-import com.jintin.clerk.viewmodel.LogListViewModel
+import com.jintin.clerk.app.R
+import com.jintin.clerk.app.dagger.component.ViewerComponent
+import com.jintin.clerk.app.obj.ClerkLog
+import com.jintin.clerk.app.viewmodel.LogListViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
@@ -39,7 +39,7 @@ class LogListFragment : Fragment() {
         @Nullable container: ViewGroup?,
         @Nullable savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(com.jintin.clerk.R.layout.fragment_list, container, false)
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

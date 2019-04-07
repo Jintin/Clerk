@@ -3,8 +3,8 @@ package com.jintin.clerk.app
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.lib.ClerkUtils
-import com.jintin.clerk.obj.ClerkLog
 
 class LogReceiver : BroadcastReceiver() {
 

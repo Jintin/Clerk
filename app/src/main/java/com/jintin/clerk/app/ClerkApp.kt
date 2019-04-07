@@ -1,9 +1,9 @@
 package com.jintin.clerk.app
 
 import android.app.Application
-import com.jintin.clerk.dagger.component.AppComponent
-import com.jintin.clerk.dagger.component.DaggerAppComponent
-import com.jintin.clerk.dagger.module.RoomModule
+import com.jintin.clerk.app.dagger.component.AppComponent
+import com.jintin.clerk.app.dagger.component.DaggerAppComponent
+import com.jintin.clerk.app.dagger.module.RoomModule
 
 class ClerkApp : Application() {
 

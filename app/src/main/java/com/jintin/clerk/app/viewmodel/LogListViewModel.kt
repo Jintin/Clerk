@@ -1,10 +1,10 @@
-package com.jintin.clerk.viewmodel
+package com.jintin.clerk.app.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.jintin.clerk.obj.ClerkLog
-import com.jintin.clerk.repository.LogRepository
+import com.jintin.clerk.app.obj.ClerkLog
+import com.jintin.clerk.app.repository.LogRepository
 
 class LogListViewModel(val logRepository: LogRepository) : ViewModel() {
 

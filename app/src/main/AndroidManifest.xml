@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.jintin.clerk">
+          package="com.jintin.clerk.app">
 
     <application
-            android:name=".app.ClerkApp"
+            android:name=".ClerkApp"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -11,7 +11,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".app.ui.MainActivity"
+                android:name=".ui.MainActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,14 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <receiver android:name=".app.LogReceiver"
+        <receiver android:name=".LogReceiver"
                   android:enabled="true"
                   android:exported="true">
             <intent-filter>
                 <action android:name="com.jintin.clerk.LOG_ACTION"/>
             </intent-filter>
         </receiver>
-        <service android:name=".app.LogService"/>
+        <service android:name=".LogService"/>
     </application>
 
 </manifest>
