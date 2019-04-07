@@ -12,16 +12,17 @@ class LogReceiver : BroadcastReceiver() {
         when (intent?.action) {
             ClerkUtils.LOG_ACTION -> {
                 val app = intent.getStringExtra(ClerkUtils.EXTRA_APP)
-                val channel = intent.getStringExtra(ClerkUtils.EXTRA_CHANNEL)
+                val channel = intent.getStringExtra(ClerkUtils.EXTRA_CHANNEL) ?: ""
                 val string = intent.getStringExtra(ClerkUtils.EXTRA_DATA)
+                if (app == null || string == null) {
+                    return
+                }
                 context?.startService(
                     Intent(context, LogService::class.java)
                         .putExtra(
                             LogService.CLERK_LOG,
                             ClerkLog(
-                                app = app,
-                                channel = channel ?: "",
-                                log = string
+                                app = app, channel = channel, log = string
                             )
                         )
                 )
