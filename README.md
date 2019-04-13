@@ -5,22 +5,20 @@
 Clerk is a log service to collect and display your app log on Android devices.
 
 ## Install
-1. Simple install by gradle dependency to your project
+
+* Simple install by gradle dependency to your project
     ```groovy
     implementation 'com.github.jintin:clerk:1.0'
     ```
-
-2. Install the agent app on Google Play<https://play.google.com/store/apps/details?id=com.jintin.clerk> or build from `app` module.
+* Install the agent app on [Google Play](https://play.google.com/store/apps/details?id=com.jintin.clerk) or build from `app` module.
 
 ## Usage
 
-1. Build app module and install on your Android device.
+Clerk send log information by Android broadcast functionality. There are two ways to do that:
 
-2. Send log information by Android broadcast functionality. There are two ways to do that:
+1. Installing the `lib` module by gradle and calling the built-in function `ClerkUtils.log()` with require parameter. You can get more information by tracing the [sample module](https://github.com/Jintin/Clerk/tree/master/sample)
 
-    - Installing the `lib` module by gradle and calling the built-in function `ClerkUtils.log()` with require parameter. You can get more information by tracing the [sample module](https://github.com/Jintin/Clerk/tree/master/sample)
-
-    - Sending the broadcast by your own follow by the interface:
+1. Sending the broadcast by your own follow by the interface:
     ```kotlin
     Intent("com.jintin.clerk.LOG_ACTION").also {
         it.putExtra("data", "your Log information")
