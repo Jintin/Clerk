@@ -8,15 +8,24 @@ import com.jintin.clerk.app.R
 import com.jintin.clerk.app.obj.ClerkLog
 import kotlinx.android.synthetic.main.adapter_log.view.*
 
+/**
+ * Adapter for viewing ClerkLog
+ */
 class LogListAdapter : RecyclerView.Adapter<LogViewHolder>() {
     private var list: MutableList<ClerkLog> = mutableListOf()
 
+    /**
+     * Set logs
+     */
     fun setData(list: List<ClerkLog>) {
         this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
     }
 
+    /**
+     * Append logs
+     */
     fun addData(list: List<ClerkLog>) {
         this.list.addAll(list)
         notifyDataSetChanged()
@@ -34,10 +43,16 @@ class LogListAdapter : RecyclerView.Adapter<LogViewHolder>() {
     }
 }
 
+/**
+ * ViewHolder for LogListAdapter
+ */
 class LogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val channelView = itemView.channelView
     private val textView = itemView.textView
 
+    /**
+     * Bind ClerkLog with View
+     */
     fun bind(clerkLog: ClerkLog) {
         if (clerkLog.channel.isEmpty()) {
             channelView.visibility = View.GONE

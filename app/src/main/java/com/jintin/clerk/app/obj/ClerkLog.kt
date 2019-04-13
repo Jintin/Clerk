@@ -5,6 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * ClerkLog object
+ */
 @Parcelize
 @Entity(tableName = "logs")
 data class ClerkLog(

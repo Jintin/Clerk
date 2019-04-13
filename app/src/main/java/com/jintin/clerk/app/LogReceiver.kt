@@ -6,6 +6,9 @@ import android.content.Intent
 import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.lib.ClerkUtils
 
+/**
+ * LogReceiver to listen incoming logs
+ */
 class LogReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {

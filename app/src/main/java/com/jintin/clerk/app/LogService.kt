@@ -7,6 +7,9 @@ import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.repository.LogRepository
 import javax.inject.Inject
 
+/**
+ * LogService to process incoming logs to database
+ */
 class LogService : IntentService("log") {
 
     companion object {

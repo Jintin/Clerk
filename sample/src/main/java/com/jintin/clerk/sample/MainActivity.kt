@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.jintin.clerk.lib.ClerkUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * MainActivity
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

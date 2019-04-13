@@ -3,20 +3,26 @@ package com.jintin.clerk.app.dagger.component
 import com.jintin.clerk.app.ClerkApp
 import com.jintin.clerk.app.LogService
 import com.jintin.clerk.app.dagger.module.LogModule
-import com.jintin.clerk.app.obj.ClerkLogDao
 import dagger.Subcomponent
 
+/**
+ * ServiceComponent used by dagger
+ */
 @LogScope
 @Subcomponent(modules = [LogModule::class])
 interface ServiceComponent {
 
+    /**
+     * dagger inject method
+     */
     fun inject(fragment: LogService)
-
-    fun clerkLogDao(): ClerkLogDao
 
     companion object {
         var component: ServiceComponent? = null
 
+        /**
+         * Init ServiceComponent function
+         */
         fun init(): ServiceComponent {
             return component ?: ClerkApp.get().component()
                 .plusServiceComponent(LogModule())
@@ -25,6 +31,9 @@ interface ServiceComponent {
                 }
         }
 
+        /**
+         * Clear component
+         */
         fun clear() {
             component = null
         }

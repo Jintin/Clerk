@@ -7,6 +7,9 @@ import io.reactivex.Maybe
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+/**
+ * LogRepository instance
+ */
 class LogRepositoryImpl @Inject constructor(
     private val localDataSource: ClerkLogDao
 ) : LogRepository {

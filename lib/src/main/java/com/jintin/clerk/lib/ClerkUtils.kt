@@ -4,6 +4,9 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 
+/**
+ * Helper for sending logs
+ */
 object ClerkUtils {
 
     const val LOG_ACTION = "com.jintin.clerk.LOG_ACTION"
@@ -13,10 +16,16 @@ object ClerkUtils {
     const val EXTRA_CHANNEL = "channel"
     const val EXTRA_DATA = "data"
 
+    /**
+     * log method without channel
+     */
     fun log(context: Context, text: String) {
         log(context, null, text)
     }
 
+    /**
+     * log method
+     */
     fun log(context: Context, channel: String?, text: String) {
         Intent(LOG_ACTION).also {
             it.putExtra(EXTRA_DATA, text)

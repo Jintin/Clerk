@@ -14,7 +14,9 @@ import com.jintin.clerk.app.viewmodel.LogListViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
-
+/**
+ * LogListFragment to show log list
+ */
 class LogListFragment : Fragment() {
     @Inject
     lateinit var factory: LogListViewModel.Factory

@@ -7,9 +7,15 @@ import com.jintin.clerk.app.repository.LogRepositoryImpl
 import dagger.Module
 import dagger.Provides
 
+/**
+ * LogModule for LogRepository
+ */
 @Module
 class LogModule {
 
+    /**
+     * Provide LogRepository
+     */
     @LogScope
     @Provides
     fun provideLogRepository(dao: ClerkLogDao): LogRepository {

@@ -5,12 +5,19 @@ import com.jintin.clerk.app.dagger.component.AppComponent
 import com.jintin.clerk.app.dagger.component.DaggerAppComponent
 import com.jintin.clerk.app.dagger.module.RoomModule
 
+/**
+ * ClerkApp
+ */
 class ClerkApp : Application() {
 
     lateinit var component: AppComponent
 
     companion object {
         lateinit var instance: ClerkApp
+
+        /**
+         *Get ClerkApp instance
+         */
         fun get(): ClerkApp {
             return instance
         }
@@ -22,6 +29,9 @@ class ClerkApp : Application() {
         component = DaggerAppComponent.builder().roomModule(RoomModule(this)).build()
     }
 
+    /**
+     * Get AppComponent instance
+     */
     fun component(): AppComponent {
         return component
     }
