@@ -14,13 +14,13 @@ interface ClerkLogDao {
     /**
      * Get LiveData of logs
      */
-    @Query("SELECT * FROM logs order by id DESC")
+    @Query("SELECT * FROM logs")
     fun getLogs(): LiveData<List<ClerkLog>>
 
     /**
      * Get LiveData of logs from specific app
      */
-    @Query("SELECT * FROM logs where app = :app order by id DESC")
+    @Query("SELECT * FROM logs where app = :app")
     fun getLogs(app: String): LiveData<List<ClerkLog>>
 
     /**
