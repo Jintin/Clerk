@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jintin.clerk.app.R
 import com.jintin.clerk.app.dagger.component.ViewerComponent
 import com.jintin.clerk.app.obj.ClerkLog
+import com.jintin.clerk.app.utils.PrefKey
+import com.jintin.clerk.app.utils.getBool
 import com.jintin.clerk.app.viewmodel.LogListViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
@@ -32,6 +34,9 @@ class LogListFragment : Fragment() {
             .observe(this, Observer<List<ClerkLog>> {
                 emptyView.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
                 adapter.setData(it)
+                if (activity.getBool(PrefKey.AUTO_SCROLL)) {
+                    recyclerView.smoothScrollToPosition(0)
+                }
             })
         setHasOptionsMenu(true)
     }

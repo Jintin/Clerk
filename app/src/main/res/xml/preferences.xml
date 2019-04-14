@@ -1,0 +1,31 @@
+<androidx.preference.PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+            app:title="@string/preference">
+        <SwitchPreferenceCompat
+                app:key="auto_scroll"
+                app:title="@string/auto_scroll"
+                app:summary="@string/auto_scroll_summary"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+            app:title="@string/about">
+        <Preference
+                app:title="@string/github">
+            <intent android:action="android.intent.action.VIEW"
+                    android:data="https://github.com/Jintin/Clerk"/>
+        </Preference>
+        <Preference
+                app:title="@string/googleplay">
+            <intent
+                    android:action="android.intent.action.VIEW"
+                    android:data="https://play.google.com/store/apps/details?id=com.jintin.clerk"
+            />
+        </Preference>
+        <Preference
+                app:title="@string/version"
+                app:summary="@string/versionName"/>
+    </PreferenceCategory>
+
+
+</androidx.preference.PreferenceScreen>

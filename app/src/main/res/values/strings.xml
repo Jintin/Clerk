@@ -3,4 +3,12 @@
     <string name="action_settings">Settings</string>
     <string name="action_clear">Clear</string>
     <string name="no_data">There\'s no data yet!</string>
+
+    <string name="preference">Preference</string>
+    <string name="auto_scroll">Auto scroll</string>
+    <string name="auto_scroll_summary">Auto scroll to latest log</string>
+    <string name="about">About</string>
+    <string name="github">View on GitHub</string>
+    <string name="googleplay">View on GooglePlay</string>
+    <string name="version">Version</string>
 </resources>
