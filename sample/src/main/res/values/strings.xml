@@ -4,4 +4,6 @@
     <string name="hint_channel">Type Channel</string>
     <string name="hint_log">Type Log</string>
     <string name="send_log">Send Log</string>
+    <string name="start_tick">Start Tick</string>
+    <string name="stop_tick">Stop Tick</string>
 </resources>
