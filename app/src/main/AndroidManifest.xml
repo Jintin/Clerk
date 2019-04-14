@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.jintin.clerk.app">
 
@@ -19,6 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.setting.SettingActivity"
+                  android:label="@string/action_settings"/>
         <receiver android:name=".LogReceiver"
                   android:enabled="true"
                   android:exported="true">
