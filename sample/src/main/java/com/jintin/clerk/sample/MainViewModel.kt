@@ -7,16 +7,25 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
+/**
+ * ViewModel for MainActivity
+ */
 class MainViewModel : ViewModel() {
 
     private var tickState = MutableLiveData<Boolean>()
     private var tickEvent = MutableLiveData<Long>()
     private var disposible: Disposable? = null
 
+    /**
+     * Get tick state of on/off
+     */
     fun getTickState(): MutableLiveData<Boolean> {
         return tickState
     }
 
+    /**
+     * Get tick LiveData to observe when it's tick
+     */
     fun getTickEvent(): MutableLiveData<Long> {
         return tickEvent
     }
@@ -26,6 +35,9 @@ class MainViewModel : ViewModel() {
         disposible?.dispose()
     }
 
+    /**
+     * Toogle the tick state
+     */
     fun toggleTick() {
         if (tickState.value == true) {
             stopTick()
