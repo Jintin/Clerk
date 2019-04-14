@@ -20,15 +20,16 @@ class LogReceiver : BroadcastReceiver() {
                 if (app == null || string == null) {
                     return
                 }
-                context?.startService(
-                    Intent(context, LogService::class.java)
+                context?.let {
+                    val serviceIntent = Intent(it, LogService::class.java)
                         .putExtra(
                             LogService.CLERK_LOG,
                             ClerkLog(
                                 app = app, channel = channel, log = string
                             )
                         )
-                )
+                    LogService.enqueueWork(it, serviceIntent)
+                }
             }
         }
 
