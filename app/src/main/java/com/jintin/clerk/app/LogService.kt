@@ -1,7 +1,8 @@
 package com.jintin.clerk.app
 
-import android.app.IntentService
+import android.content.Context
 import android.content.Intent
+import androidx.core.app.JobIntentService
 import com.jintin.clerk.app.dagger.component.ServiceComponent
 import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.repository.LogRepository
@@ -10,10 +11,18 @@ import javax.inject.Inject
 /**
  * LogService to process incoming logs to database
  */
-class LogService : IntentService("log") {
+class LogService : JobIntentService() {
 
     companion object {
         const val CLERK_LOG = "log"
+        private const val JOB_ID = 1
+
+        /**
+         * Enqueue job
+         */
+        fun enqueueWork(context: Context, work: Intent) {
+            enqueueWork(context, LogService::class.java, JOB_ID, work)
+        }
     }
 
     @Inject
@@ -24,8 +33,8 @@ class LogService : IntentService("log") {
         ServiceComponent.init().inject(this)
     }
 
-    override fun onHandleIntent(intent: Intent?) {
-        intent?.getParcelableExtra<ClerkLog>(CLERK_LOG)?.let {
+    override fun onHandleWork(intent: Intent) {
+        intent.getParcelableExtra<ClerkLog>(CLERK_LOG)?.let {
             logRepository.addLog(it)
         }
     }
