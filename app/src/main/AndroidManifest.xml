@@ -18,11 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.setting.SettingActivity"
-                  android:label="@string/action_settings"/>
-        <receiver android:name=".LogReceiver"
-                  android:enabled="true"
-                  android:exported="true">
+        <activity
+                android:name=".ui.setting.SettingActivity"
+                android:label="@string/action_settings"/>
+        <receiver
+                android:name=".LogReceiver"
+                android:enabled="true"
+                android:exported="true">
             <intent-filter>
                 <action android:name="com.jintin.clerk.LOG_ACTION"/>
             </intent-filter>

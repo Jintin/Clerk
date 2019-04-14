@@ -12,7 +12,8 @@
             app:title="@string/about">
         <Preference
                 app:title="@string/github">
-            <intent android:action="android.intent.action.VIEW"
+            <intent
+                    android:action="android.intent.action.VIEW"
                     android:data="https://github.com/Jintin/Clerk"/>
         </Preference>
         <Preference
@@ -26,6 +27,5 @@
                 app:title="@string/version"
                 app:summary="@string/versionName"/>
     </PreferenceCategory>
-
 
 </androidx.preference.PreferenceScreen>
