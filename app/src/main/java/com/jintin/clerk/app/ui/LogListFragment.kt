@@ -35,7 +35,7 @@ class LogListFragment : Fragment() {
                 emptyView.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
                 adapter.setData(it)
                 if (it.isNotEmpty() && activity.getBool(PrefKey.AUTO_SCROLL)) {
-                    recyclerView.smoothScrollToPosition(it.size - 1)
+                    recyclerView.scrollToPosition(it.size - 1)
                 }
             })
         setHasOptionsMenu(true)
