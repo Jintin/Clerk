@@ -21,4 +21,13 @@ class ViewerModule {
         return LogListViewModel.Factory(logRepository)
     }
 
+    /**
+     * Provide LogListViewModel
+     */
+    @LogScope
+    @Provides
+    fun provideViewModel(logRepository: LogRepository): LogListViewModel {
+        return LogListViewModel(logRepository)
+    }
+
 }

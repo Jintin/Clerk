@@ -7,6 +7,10 @@
                 app:key="auto_scroll"
                 app:title="@string/auto_scroll"
                 app:summary="@string/auto_scroll_summary"/>
+        <SwitchPreferenceCompat
+                app:key="draw_overlay"
+                app:title="@string/instant_log"
+                app:summary="@string/instant_log_summary"/>
     </PreferenceCategory>
     <PreferenceCategory
             app:title="@string/about">

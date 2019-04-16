@@ -1,9 +1,13 @@
 package com.jintin.clerk.app
 
+import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import com.jintin.clerk.app.obj.ClerkLog
+import com.jintin.clerk.app.utils.PrefKey
+import com.jintin.clerk.app.utils.getBool
 import com.jintin.clerk.lib.ClerkUtils
 
 /**
@@ -20,18 +24,32 @@ class LogReceiver : BroadcastReceiver() {
                 if (app == null || string == null) {
                     return
                 }
-                context?.let {
-                    val serviceIntent = Intent(it, LogService::class.java)
-                        .putExtra(
-                            LogService.CLERK_LOG,
-                            ClerkLog(
-                                app = app, channel = channel, log = string
-                            )
-                        )
-                    LogService.enqueueWork(it, serviceIntent)
+                context?.apply {
+                    if (getBool(PrefKey.DRAW_OVERLAY)) {
+                        val serviceIntent = getTargetIntent(InstantService::class.java, this, app, channel, string)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            startForegroundService(serviceIntent)
+                        } else {
+                            startService(serviceIntent)
+                        }
+                    }
+                    val serviceIntent = getTargetIntent(LogService::class.java, this, app, channel, string)
+                    LogService.enqueueWork(this, serviceIntent)
                 }
             }
         }
     }
+
+    private fun getTargetIntent(
+        target: Class<out Service>,
+        context: Context,
+        app: String,
+        channel: String,
+        string: String
+    ) = Intent(context, target)
+        .putExtra(
+            LogService.CLERK_LOG,
+            ClerkLog(app = app, channel = channel, log = string)
+        )
 
 }

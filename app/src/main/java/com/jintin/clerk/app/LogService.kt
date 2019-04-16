@@ -29,21 +29,19 @@ class LogService : JobIntentService() {
 
     @Inject
     lateinit var logRepository: LogRepository
+    private lateinit var component: ServiceComponent
 
     override fun onCreate() {
         super.onCreate()
-        ServiceComponent.init().inject(this)
+        component = ServiceComponent.init()
+        component.inject(this)
     }
 
     override fun onHandleWork(intent: Intent) {
         intent.getParcelableExtra<ClerkLog>(CLERK_LOG)?.let {
             logRepository.addLog(it)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ServiceComponent.clear()
+        startService(Intent(this, InstantService::class.java))
     }
 
 }

@@ -23,12 +23,16 @@ class LogListFragment : Fragment() {
     @Inject
     lateinit var factory: LogListViewModel.Factory
     private lateinit var viewModel: LogListViewModel
+    private var component: ViewerComponent? = null
     private val adapter = LogListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ViewerComponent.init().inject(this)
+        if (component == null) {
+            component = ViewerComponent.init()
+        }
+        component?.inject(this)
         viewModel = ViewModelProviders.of(this, factory)[LogListViewModel::class.java]
         viewModel.getList()
             .observe(this, Observer<List<ClerkLog>> {
@@ -52,11 +56,6 @@ class LogListFragment : Fragment() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ViewerComponent.clear()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -1,6 +1,7 @@
 package com.jintin.clerk.app.dagger.component
 
 import com.jintin.clerk.app.ClerkApp
+import com.jintin.clerk.app.InstantService
 import com.jintin.clerk.app.LogService
 import com.jintin.clerk.app.dagger.module.LogModule
 import dagger.Subcomponent
@@ -15,28 +16,21 @@ interface ServiceComponent {
     /**
      * dagger inject method
      */
-    fun inject(fragment: LogService)
+    fun inject(service: LogService)
+
+    /**
+     * dagger inject method
+     */
+    fun inject(service: InstantService)
 
     companion object {
-
-        var component: ServiceComponent? = null
 
         /**
          * Init ServiceComponent function
          */
         fun init(): ServiceComponent {
-            return component ?: ClerkApp.get().component()
+            return ClerkApp.get().component()
                 .plusServiceComponent(LogModule())
-                .also {
-                    component = it
-                }
-        }
-
-        /**
-         * Clear component
-         */
-        fun clear() {
-            component = null
         }
     }
 
