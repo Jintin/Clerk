@@ -1,23 +1,19 @@
-package com.jintin.clerk
+package com.jintin.clerk.app.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.obj.ClerkLogDao
-import com.jintin.clerk.app.repository.LogRepository
-import com.jintin.clerk.app.repository.LogRepositoryImpl
+import com.jintin.clerk.getLog
+import com.jintin.clerk.getLogList
+import com.jintin.clerk.verify
+import com.jintin.clerk.whenever
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
-import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 /**
@@ -51,24 +47,32 @@ class LogRepositoryTest {
         RxJavaPlugins.setIoSchedulerHandler { null }
     }
 
+    /**
+     * Test get empty log
+     */
     @Test
     fun getEmptyLog() {
         val data = MutableLiveData<List<ClerkLog>>()
         data.postValue(listOf())
-        `when`(localDataSource.getLogs()).thenReturn(data)
-        assertEquals(0, logRepository.getLogList().value?.size)
+        whenever(localDataSource.getLogs()).thenReturn(data)
+        Assert.assertEquals(0, logRepository.getLogList().value?.size)
     }
 
+    /**
+     * Test get log
+     */
     @Test
     fun getLogs() {
         val SIZE = 4
         val data = MutableLiveData<List<ClerkLog>>()
         data.postValue(getLogList(SIZE))
-        `when`(localDataSource.getLogs()).thenReturn(data)
-
-        assertEquals(SIZE, logRepository.getLogList().value?.size)
+        whenever(localDataSource.getLogs()).thenReturn(data)
+        Assert.assertEquals(SIZE, logRepository.getLogList().value?.size)
     }
 
+    /**
+     * Test add log
+     */
     @Test
     fun addLog() {
         val log = getLog()
@@ -76,6 +80,9 @@ class LogRepositoryTest {
         verify(localDataSource).insert(log)
     }
 
+    /**
+     * Test clear log
+     */
     @Test
     fun clearLog() {
         logRepository.clearLogs()
