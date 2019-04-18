@@ -40,7 +40,7 @@ class LogListViewModelTest {
      */
     @Test
     fun clear() {
-//        logListViewModel.clear()
+        logListViewModel.clear()
         verify(logRepository).clearLogs()
     }
 }
