@@ -13,14 +13,14 @@ class ClerkApp : Application() {
     lateinit var component: AppComponent
 
     companion object {
+
         lateinit var instance: ClerkApp
 
         /**
          *Get ClerkApp instance
          */
-        fun get(): ClerkApp {
-            return instance
-        }
+        fun get(): ClerkApp = instance
+
     }
 
     override fun onCreate() {

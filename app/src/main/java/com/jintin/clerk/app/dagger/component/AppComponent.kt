@@ -28,4 +28,5 @@ interface AppComponent {
      * ServiceModule binding
      */
     fun plusServiceComponent(module: LogModule): ServiceComponent
+
 }

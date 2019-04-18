@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.jintin.clerk.app.R
 
+/**
+ * Base Activity for single fragment
+ */
 abstract class ContainerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,4 +24,5 @@ abstract class ContainerActivity : AppCompatActivity() {
      * Return target Fragment
      */
     abstract fun getFragment(): Fragment
+
 }

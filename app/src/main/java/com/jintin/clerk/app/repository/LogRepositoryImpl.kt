@@ -18,18 +18,16 @@ class LogRepositoryImpl @Inject constructor(
         localDataSource.insert(log)
     }
 
-    override fun getLogList(): LiveData<List<ClerkLog>> {
-        return localDataSource.getLogs()
-    }
+    override fun getLogList(): LiveData<List<ClerkLog>> =
+        localDataSource.getLogs()
 
-    override fun getLogList(app: String): LiveData<List<ClerkLog>> {
-        return localDataSource.getLogs(app)
-    }
+    override fun getLogList(app: String): LiveData<List<ClerkLog>> =
+        localDataSource.getLogs(app)
 
     override fun clearLogs() {
         Maybe.fromAction<Void> { localDataSource.clearLogs() }
             .subscribeOn(Schedulers.io())
             .subscribe()
-
     }
+
 }

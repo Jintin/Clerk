@@ -16,14 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_channel"
-            android:inputType="text"/>
+            android:inputType="text"
+            tools:ignore="Autofill"/>
 
     <EditText
             android:id="@+id/logText"
             android:hint="@string/hint_log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"/>
+            android:inputType="text"
+            tools:ignore="Autofill"/>
 
     <Button
             android:id="@+id/send"

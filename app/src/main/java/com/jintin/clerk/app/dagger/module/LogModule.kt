@@ -21,4 +21,5 @@ class LogModule {
     fun provideLogRepository(dao: ClerkLogDao): LogRepository {
         return LogRepositoryImpl(dao)
     }
+
 }

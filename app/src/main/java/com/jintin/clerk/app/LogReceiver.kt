@@ -32,6 +32,6 @@ class LogReceiver : BroadcastReceiver() {
                 }
             }
         }
-
     }
+
 }

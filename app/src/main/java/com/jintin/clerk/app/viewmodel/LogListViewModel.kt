@@ -14,9 +14,7 @@ class LogListViewModel(private val logRepository: LogRepository) : ViewModel() {
     /**
      * Get LiveData of log list
      */
-    fun getList(): LiveData<List<ClerkLog>> {
-        return logRepository.getLogList()
-    }
+    fun getList(): LiveData<List<ClerkLog>> = logRepository.getLogList()
 
     /**
      * Clear all logs
@@ -34,4 +32,5 @@ class LogListViewModel(private val logRepository: LogRepository) : ViewModel() {
             return LogListViewModel(logRepository) as T
         }
     }
+
 }
