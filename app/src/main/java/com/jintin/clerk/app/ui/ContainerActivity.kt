@@ -17,5 +17,8 @@ abstract class ContainerActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Return target Fragment
+     */
     abstract fun getFragment(): Fragment
 }
