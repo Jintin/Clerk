@@ -1,11 +1,11 @@
 package com.jintin.clerk.app.viewmodel
 
 import com.jintin.clerk.app.repository.LogRepository
+import com.jintin.clerk.verify
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 /**

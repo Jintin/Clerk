@@ -1,6 +1,22 @@
 package com.jintin.clerk
 
 import com.jintin.clerk.app.obj.ClerkLog
+import org.mockito.Mockito
+import org.mockito.stubbing.OngoingStubbing
+
+/**
+ * Alias Mockito when
+ */
+fun <T> whenever(methodCall: T): OngoingStubbing<T> {
+    return Mockito.`when`(methodCall)
+}
+
+/**
+ * Alias Mockito verify
+ */
+fun <T> verify(mock: T): T {
+    return Mockito.verify(mock)
+}
 
 /**
  * Get sample ClerkLog

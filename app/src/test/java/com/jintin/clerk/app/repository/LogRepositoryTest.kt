@@ -6,13 +6,14 @@ import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.obj.ClerkLogDao
 import com.jintin.clerk.getLog
 import com.jintin.clerk.getLogList
+import com.jintin.clerk.verify
+import com.jintin.clerk.whenever
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.junit.*
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
 /**
@@ -53,7 +54,7 @@ class LogRepositoryTest {
     fun getEmptyLog() {
         val data = MutableLiveData<List<ClerkLog>>()
         data.postValue(listOf())
-        Mockito.`when`(localDataSource.getLogs()).thenReturn(data)
+        whenever(localDataSource.getLogs()).thenReturn(data)
         Assert.assertEquals(0, logRepository.getLogList().value?.size)
     }
 
@@ -65,8 +66,7 @@ class LogRepositoryTest {
         val SIZE = 4
         val data = MutableLiveData<List<ClerkLog>>()
         data.postValue(getLogList(SIZE))
-        Mockito.`when`(localDataSource.getLogs()).thenReturn(data)
-
+        whenever(localDataSource.getLogs()).thenReturn(data)
         Assert.assertEquals(SIZE, logRepository.getLogList().value?.size)
     }
 
@@ -77,7 +77,7 @@ class LogRepositoryTest {
     fun addLog() {
         val log = getLog()
         logRepository.addLog(log)
-        Mockito.verify(localDataSource).insert(log)
+        verify(localDataSource).insert(log)
     }
 
     /**
@@ -86,6 +86,6 @@ class LogRepositoryTest {
     @Test
     fun clearLog() {
         logRepository.clearLogs()
-        Mockito.verify(localDataSource).clearLogs()
+        verify(localDataSource).clearLogs()
     }
 }
