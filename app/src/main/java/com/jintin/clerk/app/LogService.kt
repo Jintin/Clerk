@@ -14,6 +14,7 @@ import javax.inject.Inject
 class LogService : JobIntentService() {
 
     companion object {
+
         const val CLERK_LOG = "log"
         private const val JOB_ID = 1
 
@@ -23,6 +24,7 @@ class LogService : JobIntentService() {
         fun enqueueWork(context: Context, work: Intent) {
             enqueueWork(context, LogService::class.java, JOB_ID, work)
         }
+
     }
 
     @Inject

@@ -18,6 +18,7 @@ interface ViewerComponent {
     fun inject(fragment: LogListFragment)
 
     companion object {
+
         var component: ViewerComponent? = null
 
         /**
@@ -38,4 +39,5 @@ interface ViewerComponent {
             component = null
         }
     }
+
 }

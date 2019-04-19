@@ -20,4 +20,5 @@ class ViewerModule {
     fun provideViewModelFactory(logRepository: LogRepository): LogListViewModel.Factory {
         return LogListViewModel.Factory(logRepository)
     }
+
 }

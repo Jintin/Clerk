@@ -18,6 +18,7 @@ interface ServiceComponent {
     fun inject(fragment: LogService)
 
     companion object {
+
         var component: ServiceComponent? = null
 
         /**
@@ -38,4 +39,5 @@ interface ServiceComponent {
             component = null
         }
     }
+
 }

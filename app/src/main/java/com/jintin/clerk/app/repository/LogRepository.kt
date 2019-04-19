@@ -26,4 +26,5 @@ interface LogRepository {
      * Clear all logs
      */
     fun clearLogs()
+
 }

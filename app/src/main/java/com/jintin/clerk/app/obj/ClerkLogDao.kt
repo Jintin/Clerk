@@ -34,4 +34,5 @@ interface ClerkLogDao {
      */
     @Query("DELETE FROM logs")
     fun clearLogs()
+
 }

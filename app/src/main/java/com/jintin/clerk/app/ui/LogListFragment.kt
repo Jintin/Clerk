@@ -2,7 +2,6 @@ package com.jintin.clerk.app.ui
 
 import android.os.Bundle
 import android.view.*
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,6 +19,7 @@ import javax.inject.Inject
  * LogListFragment to show log list
  */
 class LogListFragment : Fragment() {
+
     @Inject
     lateinit var factory: LogListViewModel.Factory
     private lateinit var viewModel: LogListViewModel
@@ -43,11 +43,9 @@ class LogListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        @Nullable container: ViewGroup?,
-        @Nullable savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_list, container, false)
-    }
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflate(R.layout.fragment_list, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,6 +72,6 @@ class LogListFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-
     }
+
 }

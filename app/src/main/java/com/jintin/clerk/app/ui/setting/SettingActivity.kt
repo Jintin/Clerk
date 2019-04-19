@@ -8,4 +8,5 @@ import com.jintin.clerk.app.ui.ContainerActivity
 class SettingActivity : ContainerActivity() {
 
     override fun getFragment() = SettingFragment()
+
 }
