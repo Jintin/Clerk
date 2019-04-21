@@ -38,7 +38,7 @@ class LogListFragment : Fragment() {
             .observe(this, Observer<List<ClerkLog>> {
                 emptyView.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
                 adapter.setData(it)
-                if (it.isNotEmpty() && activity.getBool(PrefKey.AUTO_SCROLL)) {
+                if (it.isNotEmpty() && getBool(PrefKey.AUTO_SCROLL)) {
                     recyclerView.scrollToPosition(it.size - 1)
                 }
             })

@@ -36,7 +36,7 @@ class MainViewModel : ViewModel() {
     }
 
     /**
-     * Toogle the tick state
+     * Toggle the tick state
      */
     fun toggleTick() {
         if (tickState.value == true) {

@@ -13,7 +13,7 @@ import dagger.Subcomponent
 interface ServiceComponent {
 
     /**
-     * inject LogService method
+     * Inject LogService method
      */
     fun inject(service: LogService)
 

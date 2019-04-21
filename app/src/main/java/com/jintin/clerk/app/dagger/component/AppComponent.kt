@@ -15,7 +15,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     /**
-     * dagger inject method
+     * Inject Application method
      */
     fun inject(application: Application)
 

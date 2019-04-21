@@ -28,7 +28,7 @@ class LogReceiver : BroadcastReceiver() {
                     if (getBool(PrefKey.DRAW_OVERLAY)) {
                         startInstantService(this)
                     }
-                    startLogSerivce(this, clerkLog)
+                    startLogService(this, clerkLog)
                 }
             }
         }
@@ -43,7 +43,7 @@ class LogReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun startLogSerivce(context: Context, log: ClerkLog) {
+    private fun startLogService(context: Context, log: ClerkLog) {
         val serviceIntent = Intent(context, LogService::class.java)
             .putExtra(LogService.CLERK_LOG, log)
         LogService.enqueueWork(context, serviceIntent)

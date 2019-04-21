@@ -1,10 +1,10 @@
 package com.jintin.clerk.app.ui
 
-import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import com.jintin.clerk.app.R
 import com.jintin.clerk.app.ui.setting.SettingActivity
+import com.jintin.clerk.app.utils.startActivity
 
 /**
  * MainActivity
@@ -20,7 +20,7 @@ class MainActivity : ContainerActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.action_settings -> startActivity(Intent(this, SettingActivity::class.java))
+            R.id.action_settings -> startActivity(SettingActivity::class)
         }
         return super.onOptionsItemSelected(item)
     }

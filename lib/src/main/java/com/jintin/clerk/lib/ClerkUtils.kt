@@ -17,14 +17,14 @@ object ClerkUtils {
     const val EXTRA_DATA = "data"
 
     /**
-     * log method without channel
+     * Log method without channel
      */
     fun log(context: Context, text: String) {
         log(context, null, text)
     }
 
     /**
-     * log method
+     * Log method
      */
     fun log(context: Context, channel: String?, text: String) {
         Intent(LOG_ACTION).also {
