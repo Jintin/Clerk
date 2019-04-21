@@ -1,6 +1,5 @@
 package com.jintin.clerk.app
 
-import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -24,32 +23,30 @@ class LogReceiver : BroadcastReceiver() {
                 if (app == null || string == null) {
                     return
                 }
+                val clerkLog = ClerkLog(app = app, channel = channel, log = string)
                 context?.apply {
                     if (getBool(PrefKey.DRAW_OVERLAY)) {
-                        val serviceIntent = getTargetIntent(InstantService::class.java, this, app, channel, string)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            startForegroundService(serviceIntent)
-                        } else {
-                            startService(serviceIntent)
-                        }
+                        startInstantService(this)
                     }
-                    val serviceIntent = getTargetIntent(LogService::class.java, this, app, channel, string)
-                    LogService.enqueueWork(this, serviceIntent)
+                    startLogSerivce(this, clerkLog)
                 }
             }
         }
     }
 
-    private fun getTargetIntent(
-        target: Class<out Service>,
-        context: Context,
-        app: String,
-        channel: String,
-        string: String
-    ) = Intent(context, target)
-        .putExtra(
-            LogService.CLERK_LOG,
-            ClerkLog(app = app, channel = channel, log = string)
-        )
+    private fun startInstantService(context: Context) {
+        val serviceIntent = Intent(context, InstantService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(serviceIntent)
+        } else {
+            context.startService(serviceIntent)
+        }
+    }
+
+    private fun startLogSerivce(context: Context, log: ClerkLog) {
+        val serviceIntent = Intent(context, LogService::class.java)
+            .putExtra(LogService.CLERK_LOG, log)
+        LogService.enqueueWork(context, serviceIntent)
+    }
 
 }
