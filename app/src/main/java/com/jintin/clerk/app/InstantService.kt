@@ -3,7 +3,6 @@ package com.jintin.clerk.app
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.PixelFormat
@@ -18,6 +17,7 @@ import androidx.lifecycle.Observer
 import com.jintin.clerk.app.dagger.component.ViewerComponent
 import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.utils.PrefKey
+import com.jintin.clerk.app.utils.getSystemManager
 import com.jintin.clerk.app.utils.hasOverlayPermission
 import com.jintin.clerk.app.view.VirtualView
 import com.jintin.clerk.app.viewmodel.LogListViewModel
@@ -36,8 +36,7 @@ class InstantService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
-        @Suppress("UNCHECKED_CAST")
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowManager = getSystemManager(WINDOW_SERVICE)
         component = ViewerComponent.init()
         component.inject(this)
         viewModel.getList().observe(this, Observer<List<ClerkLog>> {
@@ -101,8 +100,7 @@ class InstantService : LifecycleService() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            @Suppress("UNCHECKED_CAST")
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager = getSystemManager<NotificationManager>(NOTIFICATION_SERVICE)
             if (notificationManager.getNotificationChannel(PrefKey.DRAW_OVERLAY) == null) {
                 val notificationChannel =
                     NotificationChannel(
