@@ -20,6 +20,10 @@ class VirtualView : ConstraintLayout {
      * Listener for back event listener
      */
     interface OnBackListener {
+
+        /**
+         * On back click event
+         */
         fun onBackClick()
     }
 

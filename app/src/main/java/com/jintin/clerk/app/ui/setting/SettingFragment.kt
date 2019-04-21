@@ -87,14 +87,11 @@ class SettingFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPr
 
     @TargetApi(Build.VERSION_CODES.M)
     private fun launchOverlayPage(activity: Activity) {
-        try {
-            val intent = Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:${activity.application.packageName}")
-            )
-            startActivityForResult(intent, OVERLAY_PERMISSION)
-        } catch (e: Exception) {
-        }
+        val intent = Intent(
+            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+            Uri.parse("package:${activity.application.packageName}")
+        )
+        startActivityForResult(intent, OVERLAY_PERMISSION)
     }
 
     private fun turnOffDrawOverlay() {

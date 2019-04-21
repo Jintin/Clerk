@@ -12,8 +12,6 @@ import android.os.Build
 import android.view.Gravity
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-import android.view.WindowManager.LayoutParams.TYPE_PHONE
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
@@ -38,7 +36,8 @@ class InstantService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
-        windowManager = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        @Suppress("UNCHECKED_CAST")
+        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         component = ViewerComponent.init()
         component.inject(this)
         viewModel.getList().observe(this, Observer<List<ClerkLog>> {
@@ -82,10 +81,10 @@ class InstantService : LifecycleService() {
 
     private fun getOverlayLayoutParams(): ViewGroup.LayoutParams {
         val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            TYPE_APPLICATION_OVERLAY
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         } else {
             @Suppress("DEPRECATION")
-            TYPE_PHONE
+            WindowManager.LayoutParams.TYPE_PHONE
         }
         val size = Point()
         windowManager.defaultDisplay.getSize(size)
@@ -102,6 +101,7 @@ class InstantService : LifecycleService() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            @Suppress("UNCHECKED_CAST")
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (notificationManager.getNotificationChannel(PrefKey.DRAW_OVERLAY) == null) {
                 val notificationChannel =
