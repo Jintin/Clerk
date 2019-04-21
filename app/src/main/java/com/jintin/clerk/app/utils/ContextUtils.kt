@@ -1,6 +1,7 @@
 package com.jintin.clerk.app.utils
 
 import android.app.Activity
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -36,4 +37,22 @@ fun <T> Context.getSystemManager(name: String): T {
  */
 fun Context.startActivity(cls: KClass<out Activity>) {
     startActivity(Intent(this, cls.java))
+}
+
+/**
+ * Wrapper of startService
+ */
+fun Context.startService(cls: KClass<out Service>) {
+    startService(Intent(this, cls.java))
+}
+
+/**
+ * Wrapper of startService
+ */
+fun Context.startForegroundService(cls: KClass<out Service>) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        startForegroundService(Intent(this, cls.java))
+    } else {
+        startService(cls)
+    }
 }
