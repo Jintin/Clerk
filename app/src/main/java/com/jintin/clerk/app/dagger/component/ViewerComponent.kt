@@ -14,12 +14,12 @@ import dagger.Subcomponent
 interface ViewerComponent {
 
     /**
-     * dagger inject method
+     * inject LogListFragment method
      */
     fun inject(fragment: LogListFragment)
 
     /**
-     * dagger inject method
+     * inject InstantService method
      */
     fun inject(service: InstantService)
 
