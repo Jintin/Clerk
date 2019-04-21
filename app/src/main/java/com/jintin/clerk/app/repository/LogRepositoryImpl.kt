@@ -15,7 +15,9 @@ class LogRepositoryImpl @Inject constructor(
 ) : LogRepository {
 
     override fun addLog(log: ClerkLog) {
-        localDataSource.insert(log)
+        Maybe.fromAction<Void> { localDataSource.insert(log) }
+            .subscribeOn(Schedulers.io())
+            .subscribe()
     }
 
     override fun getLogList(): LiveData<List<ClerkLog>> =

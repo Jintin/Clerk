@@ -1,6 +1,7 @@
 package com.jintin.clerk.app.dagger.component
 
 import com.jintin.clerk.app.ClerkApp
+import com.jintin.clerk.app.InstantService
 import com.jintin.clerk.app.dagger.module.ViewerModule
 import com.jintin.clerk.app.ui.LogListFragment
 import dagger.Subcomponent
@@ -13,31 +14,25 @@ import dagger.Subcomponent
 interface ViewerComponent {
 
     /**
-     * dagger inject method
+     * inject LogListFragment method
      */
     fun inject(fragment: LogListFragment)
 
-    companion object {
+    /**
+     * inject InstantService method
+     */
+    fun inject(service: InstantService)
 
-        var component: ViewerComponent? = null
+    companion object {
 
         /**
          * Init ViewerComponent function
          */
         fun init(): ViewerComponent {
-            return component ?: ClerkApp.get().component()
+            return ClerkApp.get().component()
                 .plusViewerComponent(ViewerModule())
-                .also {
-                    component = it
-                }
         }
 
-        /**
-         * Clear component
-         */
-        fun clear() {
-            component = null
-        }
     }
 
 }

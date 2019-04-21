@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.repository.LogRepository
+import javax.inject.Inject
 
 /**
  * ViewModel for LogListFragment
  */
-class LogListViewModel(private val logRepository: LogRepository) : ViewModel() {
+class LogListViewModel @Inject constructor(private val logRepository: LogRepository) : ViewModel() {
 
     /**
      * Get LiveData of log list

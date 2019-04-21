@@ -7,8 +7,14 @@
     <string name="preference">Preference</string>
     <string name="auto_scroll">Auto scroll</string>
     <string name="auto_scroll_summary">Auto scroll to latest log</string>
+    <string name="instant_log">Instant Log</string>
+    <string name="instant_log_summary">Show log screen when receive Log</string>
     <string name="about">About</string>
     <string name="github">View on GitHub</string>
     <string name="googleplay">View on GooglePlay</string>
     <string name="version">Version</string>
+
+    <string name="request_overlay_title">"Need DrawOverlays Permission"</string>
+    <string name="request_overlay_message">""</string>
+
 </resources>

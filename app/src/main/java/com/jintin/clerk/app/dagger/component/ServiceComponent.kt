@@ -13,30 +13,18 @@ import dagger.Subcomponent
 interface ServiceComponent {
 
     /**
-     * dagger inject method
+     * inject LogService method
      */
-    fun inject(fragment: LogService)
+    fun inject(service: LogService)
 
     companion object {
-
-        var component: ServiceComponent? = null
 
         /**
          * Init ServiceComponent function
          */
         fun init(): ServiceComponent {
-            return component ?: ClerkApp.get().component()
+            return ClerkApp.get().component()
                 .plusServiceComponent(LogModule())
-                .also {
-                    component = it
-                }
-        }
-
-        /**
-         * Clear component
-         */
-        fun clear() {
-            component = null
         }
     }
 
