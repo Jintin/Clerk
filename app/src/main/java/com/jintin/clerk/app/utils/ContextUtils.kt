@@ -35,15 +35,15 @@ fun <T> Context.getSystemManager(name: String): T {
 /**
  * Wrapper of startActivity
  */
-fun Context.startActivity(cls: KClass<out Activity>) {
-    startActivity(Intent(this, cls.java))
+fun Context.startActivity(activity: KClass<out Activity>) {
+    startActivity(Intent(this, activity.java))
 }
 
 /**
  * Wrapper of startService
  */
-fun Context.startService(cls: KClass<out Service>) {
-    startService(Intent(this, cls.java))
+fun Context.startService(service: KClass<out Service>) {
+    startService(Intent(this, service.java))
 }
 
 /**

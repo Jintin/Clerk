@@ -6,6 +6,7 @@ import com.jintin.clerk.app.R
 import com.jintin.clerk.app.ui.setting.SettingActivity
 import com.jintin.clerk.app.utils.startActivity
 
+
 /**
  * MainActivity
  */
