@@ -6,6 +6,7 @@ import android.view.MenuItem
 import com.jintin.clerk.app.R
 import com.jintin.clerk.app.ui.setting.SettingActivity
 
+
 /**
  * MainActivity
  */

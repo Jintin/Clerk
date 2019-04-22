@@ -41,7 +41,6 @@ class LogService : JobIntentService() {
         intent.getParcelableExtra<ClerkLog>(CLERK_LOG)?.let {
             logRepository.addLog(it)
         }
-        startService(Intent(this, InstantService::class.java))
     }
 
 }
