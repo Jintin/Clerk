@@ -1,6 +1,5 @@
 package com.jintin.clerk.app.utils
 
-import android.app.Activity
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -30,13 +29,6 @@ fun Context.getBool(key: String): Boolean {
 fun <T> Context.getSystemManager(name: String): T {
     @Suppress("UNCHECKED_CAST")
     return getSystemService(name) as T
-}
-
-/**
- * Wrapper of startActivity
- */
-fun Context.startActivity(activity: KClass<out Activity>) {
-    startActivity(Intent(this, activity.java))
 }
 
 /**
