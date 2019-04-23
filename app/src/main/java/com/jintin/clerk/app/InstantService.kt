@@ -100,7 +100,7 @@ class InstantService : LifecycleService() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationManager = getSystemManager<NotificationManager>(NOTIFICATION_SERVICE)
+            val notificationManager = getSystemService(NotificationManager::class.java)
             if (notificationManager.getNotificationChannel(PrefKey.DRAW_OVERLAY) == null) {
                 val notificationChannel =
                     NotificationChannel(

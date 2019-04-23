@@ -14,7 +14,7 @@ class MainViewModel : ViewModel() {
 
     private var tickState = MutableLiveData<Boolean>()
     private var tickEvent = MutableLiveData<Long>()
-    private var disposible: Disposable? = null
+    private var disposable: Disposable? = null
 
     /**
      * Get tick state of on/off
@@ -32,7 +32,7 @@ class MainViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        disposible?.dispose()
+        disposable?.dispose()
     }
 
     /**
@@ -48,7 +48,7 @@ class MainViewModel : ViewModel() {
 
     private fun startTick() {
         tickState.value = true
-        disposible = Observable.interval(500, TimeUnit.MILLISECONDS, Schedulers.io())
+        disposable = Observable.interval(500, TimeUnit.MILLISECONDS, Schedulers.io())
             .subscribe { tick ->
                 tickEvent.postValue(tick)
             }
@@ -56,6 +56,6 @@ class MainViewModel : ViewModel() {
 
     private fun stopTick() {
         tickState.value = false
-        disposible?.dispose()
+        disposable?.dispose()
     }
 }

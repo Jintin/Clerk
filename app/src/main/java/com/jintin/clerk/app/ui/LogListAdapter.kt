@@ -39,21 +39,19 @@ class LogListAdapter : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
      * ViewHolder for LogListAdapter
      */
     class LogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val channelView = itemView.channelView
-        private val textView = itemView.textView
 
         /**
          * Bind ClerkLog with View
          */
         fun bind(clerkLog: ClerkLog) {
             if (clerkLog.channel.isEmpty()) {
-                channelView.visibility = View.GONE
+                itemView.channelView.visibility = View.GONE
             } else {
-                channelView.text = clerkLog.channel
-                channelView.visibility = View.VISIBLE
+                itemView.channelView.text = clerkLog.channel
+                itemView.channelView.visibility = View.VISIBLE
             }
 
-            textView.text = clerkLog.log
+            itemView.textView.text = clerkLog.log
         }
 
     }

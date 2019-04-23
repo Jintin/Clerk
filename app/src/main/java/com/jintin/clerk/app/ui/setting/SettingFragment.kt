@@ -1,7 +1,7 @@
 package com.jintin.clerk.app.ui.setting
 
 import android.annotation.TargetApi
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
@@ -69,27 +69,27 @@ class SettingFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPr
 
     private fun requestOverlayPermission() {
         if (!hasOverlayPermission()) {
-            activity?.let { activity ->
-                showPermissionDialog(activity)
+            context?.let { context ->
+                showPermissionDialog(context)
             }
         }
     }
 
-    private fun showPermissionDialog(activity: Activity) {
-        AlertDialog.Builder(activity)
+    private fun showPermissionDialog(context: Context) {
+        AlertDialog.Builder(context)
             .setTitle(R.string.request_overlay_title)
             .setMessage(R.string.request_overlay_message)
             .setOnCancelListener { turnOffDrawOverlay() }
             .setNegativeButton(android.R.string.no) { _, _ -> turnOffDrawOverlay() }
-            .setPositiveButton(android.R.string.ok) { _, _ -> launchOverlayPage(activity) }
+            .setPositiveButton(android.R.string.ok) { _, _ -> launchOverlayPage(context) }
             .show()
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    private fun launchOverlayPage(activity: Activity) {
+    private fun launchOverlayPage(context: Context) {
         val intent = Intent(
             Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            Uri.parse("package:${activity.application.packageName}")
+            Uri.parse("package:${context.packageName}")
         )
         startActivityForResult(intent, OVERLAY_PERMISSION)
     }

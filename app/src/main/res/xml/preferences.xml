@@ -21,7 +21,7 @@
                     android:data="https://github.com/Jintin/Clerk"/>
         </Preference>
         <Preference
-                app:title="@string/googleplay">
+                app:title="@string/google_play">
             <intent
                     android:action="android.intent.action.VIEW"
                     android:data="https://play.google.com/store/apps/details?id=com.jintin.clerk"

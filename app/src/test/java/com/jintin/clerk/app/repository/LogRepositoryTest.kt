@@ -63,11 +63,11 @@ class LogRepositoryTest {
      */
     @Test
     fun getLogs() {
-        val SIZE = 4
+        val size = 4
         val data = MutableLiveData<List<ClerkLog>>()
-        data.postValue(getLogList(SIZE))
+        data.postValue(getLogList(size))
         whenever(localDataSource.getLogs()).thenReturn(data)
-        Assert.assertEquals(SIZE, logRepository.getLogList().value?.size)
+        Assert.assertEquals(size, logRepository.getLogList().value?.size)
     }
 
     /**

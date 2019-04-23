@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment
  * Check has overlay permission
  */
 fun Fragment.hasOverlayPermission(): Boolean {
-    return activity?.hasOverlayPermission() ?: false
+    return context?.hasOverlayPermission() ?: false
 }
 
 /**
  * Get boolean from Preference
  */
 fun Fragment.getBool(key: String): Boolean {
-    return activity?.getBool(key) ?: false
+    return context?.getBool(key) ?: false
 }

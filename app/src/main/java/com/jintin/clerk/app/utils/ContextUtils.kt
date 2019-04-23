@@ -39,7 +39,7 @@ fun Context.startService(service: KClass<out Service>) {
 }
 
 /**
- * Wrapper of startService
+ * Wrapper of startForegroundService
  */
 fun Context.startForegroundService(cls: KClass<out Service>) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
