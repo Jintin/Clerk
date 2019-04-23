@@ -15,8 +15,32 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../jintin.keystore")
+
+            def isRunningOnTravis = System.getenv("CI") == "true"
+            if (isRunningOnTravis) {
+                storePassword System.getenv('RELEASE_STORE_PASSWORD')
+                keyAlias System.getenv('RELEASE_KEY_ALIAS')
+                keyPassword System.getenv('RELEASE_KEY_PASSWORD')
+            } else {
+                def keyProperties = file("../local.properties")
+                if (keyProperties.exists()) {
+                    Properties props = new Properties()
+                    props.load(new FileInputStream(keyProperties))
+                    storePassword props['RELEASE_STORE_PASSWORD']
+                    keyAlias props['RELEASE_KEY_ALIAS']
+                    keyPassword props['RELEASE_KEY_PASSWORD']
+                }
+            }
+
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
