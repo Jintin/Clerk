@@ -24,6 +24,4 @@ script:
 - "./gradlew build :app:connectedCheck"
 before_install:
 - openssl aes-256-cbc -K $encrypted_634256fda7a3_key -iv $encrypted_634256fda7a3_iv
-  -in key.properties.enc -out key.properties -d
-- openssl aes-256-cbc -K $encrypted_634256fda7a3_key -iv $encrypted_634256fda7a3_iv
   -in jintin.keystore.enc -out jintin.keystore -d
