@@ -32,7 +32,7 @@ object ClerkUtils {
             channel?.let { channel ->
                 it.putExtra(EXTRA_CHANNEL, channel)
             }
-            it.putExtra(EXTRA_APP, context.applicationContext.packageName)
+            it.putExtra(EXTRA_APP, context.packageName)
             it.component = ComponentName(CLERK_PACKAGE, CLERK_CLASS)
             context.sendBroadcast(it)
         }
