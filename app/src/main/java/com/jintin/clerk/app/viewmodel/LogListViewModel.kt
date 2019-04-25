@@ -29,9 +29,8 @@ class LogListViewModel @Inject constructor(private val logRepository: LogReposit
      */
     @Suppress("UNCHECKED_CAST")
     class Factory(private val logRepository: LogRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return LogListViewModel(logRepository) as T
-        }
+        override fun <T : ViewModel> create(modelClass: Class<T>) =
+            LogListViewModel(logRepository) as T
     }
 
 }

@@ -11,17 +11,15 @@ import kotlin.reflect.KClass
 /**
  * Check has overlay permission
  */
-fun Context.hasOverlayPermission(): Boolean {
-    return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(this)
-}
+fun Context.hasOverlayPermission() =
+    Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(this)
 
 /**
  * Get boolean from Preference
  */
-fun Context.getBool(key: String): Boolean {
-    return PreferenceManager.getDefaultSharedPreferences(this)
+fun Context.getBool(key: String) =
+    PreferenceManager.getDefaultSharedPreferences(this)
         .getBoolean(key, false)
-}
 
 /**
  * Wrapper of getSystemService

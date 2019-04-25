@@ -3,6 +3,7 @@ package com.jintin.clerk.app.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,15 +45,13 @@ class VirtualView : ConstraintLayout {
         recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
-    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
-        if (event?.keyCode == KeyEvent.KEYCODE_BACK) {
-            backListener?.let {
-                it.onBackClick()
-                return true
-            }
+    override fun dispatchKeyEvent(event: KeyEvent?) =
+        if (event?.keyCode == KeyEvent.KEYCODE_BACK && event.action == MotionEvent.ACTION_UP) {
+            backListener?.onBackClick()
+            true
+        } else {
+            super.dispatchKeyEvent(event)
         }
-        return super.dispatchKeyEvent(event)
-    }
 
     /**
      * Set on Back key event listener

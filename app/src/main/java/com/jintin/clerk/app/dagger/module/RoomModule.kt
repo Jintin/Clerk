@@ -2,7 +2,6 @@ package com.jintin.clerk.app.dagger.module
 
 import android.app.Application
 import androidx.room.Room
-import com.jintin.clerk.app.obj.ClerkLogDao
 import com.jintin.clerk.app.obj.ClerkLogDatabase
 import dagger.Module
 import dagger.Provides
@@ -22,17 +21,14 @@ class RoomModule(application: Application) {
      */
     @Singleton
     @Provides
-    fun providesRoomDatabase(): ClerkLogDatabase {
-        return database
-    }
+    fun providesRoomDatabase() = database
 
     /**
      * Provide ClerkLogDao
      */
     @Singleton
     @Provides
-    fun providesClerkLogDao(database: ClerkLogDatabase): ClerkLogDao {
-        return database.clerkLogDao()
-    }
+    fun providesClerkLogDao(database: ClerkLogDatabase) =
+        database.clerkLogDao()
 
 }

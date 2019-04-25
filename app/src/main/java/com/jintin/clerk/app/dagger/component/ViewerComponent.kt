@@ -28,11 +28,8 @@ interface ViewerComponent {
         /**
          * Init ViewerComponent function
          */
-        fun init(): ViewerComponent {
-            return ClerkApp.get().component()
-                .plusViewerComponent(ViewerModule())
-        }
-
+        fun init() = ClerkApp.get().component()
+            .plusViewerComponent(ViewerModule())
     }
 
 }

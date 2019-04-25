@@ -19,16 +19,12 @@ class MainViewModel : ViewModel() {
     /**
      * Get tick state of on/off
      */
-    fun getTickState(): MutableLiveData<Boolean> {
-        return tickState
-    }
+    fun getTickState() = tickState
 
     /**
      * Get tick LiveData to observe when it's tick
      */
-    fun getTickEvent(): MutableLiveData<Long> {
-        return tickEvent
-    }
+    fun getTickEvent() = tickEvent
 
     override fun onCleared() {
         super.onCleared()

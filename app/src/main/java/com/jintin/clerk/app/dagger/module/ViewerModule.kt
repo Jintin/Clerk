@@ -17,17 +17,16 @@ class ViewerModule {
      */
     @LogScope
     @Provides
-    fun provideViewModelFactory(logRepository: LogRepository): LogListViewModel.Factory {
-        return LogListViewModel.Factory(logRepository)
-    }
+    fun provideViewModelFactory(logRepository: LogRepository) =
+        LogListViewModel.Factory(logRepository)
+
 
     /**
      * Provide LogListViewModel
      */
     @LogScope
     @Provides
-    fun provideViewModel(logRepository: LogRepository): LogListViewModel {
-        return LogListViewModel(logRepository)
-    }
+    fun provideViewModel(logRepository: LogRepository) =
+        LogListViewModel(logRepository)
 
 }
