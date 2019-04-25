@@ -18,11 +18,13 @@ class MainActivity : ContainerActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem?) =
         when (item?.itemId) {
-            R.id.action_settings -> startActivity(Intent(this, SettingActivity::class.java))
+            R.id.action_settings -> {
+                startActivity(Intent(this, SettingActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
-    }
 
 }

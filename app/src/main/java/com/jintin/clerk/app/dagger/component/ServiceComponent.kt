@@ -22,10 +22,8 @@ interface ServiceComponent {
         /**
          * Init ServiceComponent function
          */
-        fun init(): ServiceComponent {
-            return ClerkApp.get().component()
-                .plusServiceComponent(LogModule())
-        }
+        fun init() = ClerkApp.get().component()
+            .plusServiceComponent(LogModule())
     }
 
 }

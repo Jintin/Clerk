@@ -63,14 +63,13 @@ class LogListFragment : Fragment() {
         inflater.inflate(R.menu.menu_list, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
             R.id.action_clear -> {
                 viewModel.clear()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
 
 }
