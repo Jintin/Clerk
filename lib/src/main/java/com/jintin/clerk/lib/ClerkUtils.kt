@@ -1,8 +1,10 @@
 package com.jintin.clerk.lib
 
+import android.app.Application
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 
 /**
  * Helper for sending logs
@@ -16,8 +18,35 @@ object ClerkUtils {
     const val EXTRA_CHANNEL = "channel"
     const val EXTRA_DATA = "data"
 
+    private var app: Application? = null
+
     /**
-     * Log method without channel
+     * Init the context
+     */
+    fun init(app: Application) {
+        this.app = app
+    }
+
+    /**
+     * Log method
+     */
+    fun log(text: String) {
+        log(null, text)
+    }
+
+    /**
+     * Log method
+     */
+    fun log(channel: String?, text: String) {
+        app?.let {
+            log(it, channel, text)
+        } ?: run {
+            Log.e("Clerk", "Context is not initialized")
+        }
+    }
+
+    /**
+     * Log method
      */
     fun log(context: Context, text: String) {
         log(context, null, text)

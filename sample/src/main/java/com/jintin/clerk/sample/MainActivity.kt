@@ -16,13 +16,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        ClerkUtils.init(application)
         val model = ViewModelProviders.of(this).get(MainViewModel::class.java)
         model.getTickState().observe(this, Observer { on ->
             tick.setText(if (on) R.string.stop_tick else R.string.start_tick)
         })
 
         model.getTickEvent().observeForever {
-            ClerkUtils.log(this, channelText.text.toString(), logText.text.toString() + it)
+            ClerkUtils.log(channelText.text.toString(), logText.text.toString() + it)
+//            // This one also work
+//            ClerkUtils.log(this, channelText.text.toString(), logText.text.toString() + it)
         }
 
         tick.setOnClickListener {
@@ -30,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         send.setOnClickListener {
-            ClerkUtils.log(this, channelText.text.toString(), logText.text.toString())
+            ClerkUtils.log(channelText.text.toString(), logText.text.toString())
+//            // This one also work
+//            ClerkUtils.log(this, channelText.text.toString(), logText.text.toString())
         }
     }
 }
