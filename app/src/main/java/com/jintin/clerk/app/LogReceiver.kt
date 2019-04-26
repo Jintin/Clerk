@@ -6,6 +6,7 @@ import android.content.Intent
 import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.utils.PrefKey
 import com.jintin.clerk.app.utils.getBool
+import com.jintin.clerk.app.utils.hasOverlayPermission
 import com.jintin.clerk.app.utils.startForegroundService
 import com.jintin.clerk.lib.ClerkUtils
 
@@ -25,7 +26,7 @@ class LogReceiver : BroadcastReceiver() {
                 }
                 val clerkLog = ClerkLog(app = app, channel = channel, log = string)
                 context?.apply {
-                    if (getBool(PrefKey.DRAW_OVERLAY)) {
+                    if (hasOverlayPermission() && getBool(PrefKey.DRAW_OVERLAY)) {
                         startInstantService(this)
                     }
                     startLogService(this, clerkLog)

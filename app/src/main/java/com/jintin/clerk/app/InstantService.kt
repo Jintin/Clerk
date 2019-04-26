@@ -129,7 +129,9 @@ class InstantService : LifecycleService() {
     }
 
     private fun removeOverlay() {
-        windowManager.removeView(container)
-        container = null
+        container?.let {
+            windowManager.removeView(it)
+            container = null
+        }
     }
 }
