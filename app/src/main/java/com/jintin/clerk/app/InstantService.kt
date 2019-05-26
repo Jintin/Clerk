@@ -6,11 +6,14 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.PixelFormat
-import android.graphics.Point
-import android.os.Build
+import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.O
+import android.util.Log
 import android.view.Gravity
-import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.*
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
@@ -19,7 +22,8 @@ import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.utils.PrefKey
 import com.jintin.clerk.app.utils.getSystemManager
 import com.jintin.clerk.app.utils.hasOverlayPermission
-import com.jintin.clerk.app.view.VirtualView
+import com.jintin.clerk.app.view.BubbleView
+import com.jintin.clerk.app.view.InstantLayout
 import com.jintin.clerk.app.viewmodel.LogListViewModel
 import javax.inject.Inject
 
@@ -28,11 +32,15 @@ import javax.inject.Inject
  */
 class InstantService : LifecycleService() {
 
+    interface OnWindowDragListener {
+        fun onDrag(x: Int, y: Int)
+    }
+
     @Inject
     lateinit var viewModel: LogListViewModel
     private lateinit var windowManager: WindowManager
     private lateinit var component: ViewerComponent
-    private var container: VirtualView? = null
+    private var container: InstantLayout? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -66,40 +74,66 @@ class InstantService : LifecycleService() {
         }
         setNotification()
         if (container == null) {
-            container = VirtualView(applicationContext)
-            container?.setOnBackListener(object : VirtualView.OnBackListener {
-                override fun onBackClick() {
-                    stopSelf()
+            container = InstantLayout(applicationContext)
+
+            container?.setUpdateListener(object : BubbleView.OnBubbleActionListener {
+                override fun onBubbleMinimize(minimize: Boolean) {
+                    updateSize(minimize)
+                    windowManager.updateViewLayout(container, para)
+                }
+
+                override fun onBubbleMove(x: Int, y: Int) {
+                    Log.e("jintin", "x:" + x + ", y:" + y)
+                    updateOffset(x, y)
+                    windowManager.updateViewLayout(container, para)
                 }
             })
-            windowManager.addView(container, getOverlayLayoutParams())
+            para = getLayoutParams(true)
+            windowManager.addView(container, para)
         } else {
-            windowManager.updateViewLayout(container, getOverlayLayoutParams())
+            updateSize(container?.isMinimize() == true)
+            windowManager.updateViewLayout(container, para)
         }
     }
 
-    private fun getOverlayLayoutParams(): ViewGroup.LayoutParams {
-        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+    private fun removeOverlay() {
+        container?.let {
+            windowManager.removeView(it)
+            container = null
+        }
+    }
+
+    lateinit var para: WindowManager.LayoutParams
+
+    private fun updateOffset(x: Int, y: Int) {
+        para.x += x
+        para.y += y
+    }
+
+    private fun updateSize(minimize: Boolean) {
+        val size = if (minimize) WRAP_CONTENT else MATCH_PARENT
+        para.width = size
+        para.height = size
+    }
+
+    private fun getLayoutParams(minimize: Boolean): WindowManager.LayoutParams {
+        val type = if (SDK_INT >= O) {
+            TYPE_APPLICATION_OVERLAY
         } else {
             @Suppress("DEPRECATION")
-            WindowManager.LayoutParams.TYPE_PHONE
+            TYPE_PHONE
         }
-        val size = Point()
-        windowManager.defaultDisplay.getSize(size)
-        return WindowManager.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            type,
-            WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
-            PixelFormat.TRANSLUCENT
-        ).apply {
-            gravity = Gravity.BOTTOM
-        }
+        val size = if (minimize) WRAP_CONTENT else MATCH_PARENT
+        val flags = if (container?.isMinimize() == true) FLAG_NOT_FOCUSABLE else FLAG_WATCH_OUTSIDE_TOUCH
+
+        val para = WindowManager.LayoutParams(size, size, type, flags, PixelFormat.TRANSLUCENT)
+
+        para.gravity = Gravity.TOP or Gravity.START
+        return para
     }
 
     private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (SDK_INT >= O) {
             val notificationManager = getSystemService(NotificationManager::class.java)
             if (notificationManager.getNotificationChannel(PrefKey.DRAW_OVERLAY) == null) {
                 val notificationChannel =
@@ -126,12 +160,5 @@ class InstantService : LifecycleService() {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setContentIntent(pendingIntent).build()
         startForeground(1, notification)
-    }
-
-    private fun removeOverlay() {
-        container?.let {
-            windowManager.removeView(it)
-            container = null
-        }
     }
 }

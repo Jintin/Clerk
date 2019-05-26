@@ -1,0 +1,30 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/colorAccent"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+    <com.jintin.clerk.app.view.BubbleView
+            android:id="@+id/bubbleView"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+    </com.jintin.clerk.app.view.BubbleView>
+
+    <com.jintin.clerk.app.view.VirtualView
+            android:background="@drawable/bg_round_red"
+            android:id="@+id/virtualView"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bubbleView"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+    </com.jintin.clerk.app.view.VirtualView>
+</androidx.constraintlayout.widget.ConstraintLayout>

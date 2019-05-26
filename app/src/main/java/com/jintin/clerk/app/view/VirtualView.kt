@@ -2,8 +2,6 @@ package com.jintin.clerk.app.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.KeyEvent
-import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,18 +17,6 @@ import kotlinx.android.synthetic.main.service_list.view.*
  */
 class VirtualView : ConstraintLayout {
 
-    /**
-     * Listener for back event listener
-     */
-    interface OnBackListener {
-
-        /**
-         * On back click event
-         */
-        fun onBackClick()
-    }
-
-    private var backListener: OnBackListener? = null
     private val adapter = LogListAdapter()
 
     constructor(context: Context) : super(context)
@@ -43,21 +29,6 @@ class VirtualView : ConstraintLayout {
         View.inflate(context, R.layout.service_list, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-    }
-
-    override fun dispatchKeyEvent(event: KeyEvent?) =
-        if (event?.keyCode == KeyEvent.KEYCODE_BACK && event.action == MotionEvent.ACTION_UP) {
-            backListener?.onBackClick()
-            true
-        } else {
-            super.dispatchKeyEvent(event)
-        }
-
-    /**
-     * Set on Back key event listener
-     */
-    fun setOnBackListener(backListener: OnBackListener) {
-        this.backListener = backListener
     }
 
     /**
