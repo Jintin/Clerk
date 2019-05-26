@@ -42,6 +42,14 @@ class InstantLayout : ConstraintLayout {
 
     fun setUpdateListener(listener: BubbleView.OnBubbleActionListener) {
         bubbleView.setOnBubbleActionListener(object : BubbleView.OnBubbleActionListener {
+            override fun onBubbleDragStart(x: Int, y: Int) {
+                listener.onBubbleDragStart(x, y)
+            }
+
+            override fun onBubbleDragEnd() {
+                listener.onBubbleDragEnd()
+            }
+
             override fun onBubbleMinimize(minimize: Boolean) {
                 virtualView.visibility = if (minimize) View.GONE else View.VISIBLE
                 listener.onBubbleMinimize(minimize)

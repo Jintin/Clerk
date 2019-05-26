@@ -10,7 +10,7 @@ import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.ui.LogListAdapter
 import com.jintin.clerk.app.utils.PrefKey
 import com.jintin.clerk.app.utils.getBool
-import kotlinx.android.synthetic.main.service_list.view.*
+import kotlinx.android.synthetic.main.view_virtual.view.*
 
 /**
  * VirtualView for instant log
@@ -26,7 +26,7 @@ class VirtualView : ConstraintLayout {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     init {
-        View.inflate(context, R.layout.service_list, this)
+        View.inflate(context, R.layout.view_virtual, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
     }

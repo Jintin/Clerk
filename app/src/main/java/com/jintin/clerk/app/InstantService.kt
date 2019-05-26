@@ -8,7 +8,6 @@ import android.content.res.Configuration
 import android.graphics.PixelFormat
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.O
-import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -32,15 +31,14 @@ import javax.inject.Inject
  */
 class InstantService : LifecycleService() {
 
-    interface OnWindowDragListener {
-        fun onDrag(x: Int, y: Int)
-    }
-
     @Inject
     lateinit var viewModel: LogListViewModel
     private lateinit var windowManager: WindowManager
     private lateinit var component: ViewerComponent
     private var container: InstantLayout? = null
+
+    private var offsetX = 0
+    private var offsetY = 0
 
     override fun onCreate() {
         super.onCreate()
@@ -77,14 +75,21 @@ class InstantService : LifecycleService() {
             container = InstantLayout(applicationContext)
 
             container?.setUpdateListener(object : BubbleView.OnBubbleActionListener {
+                override fun onBubbleDragStart(x: Int, y: Int) {
+                    offsetX = x - para.x
+                    offsetY = y - para.y
+                }
+
+                override fun onBubbleDragEnd() {
+                }
+
                 override fun onBubbleMinimize(minimize: Boolean) {
                     updateSize(minimize)
                     windowManager.updateViewLayout(container, para)
                 }
 
                 override fun onBubbleMove(x: Int, y: Int) {
-                    Log.e("jintin", "x:" + x + ", y:" + y)
-                    updateOffset(x, y)
+                    updateOffset(x - offsetX, y - offsetY)
                     windowManager.updateViewLayout(container, para)
                 }
             })
@@ -106,14 +111,15 @@ class InstantService : LifecycleService() {
     lateinit var para: WindowManager.LayoutParams
 
     private fun updateOffset(x: Int, y: Int) {
-        para.x += x
-        para.y += y
+        para.x = x
+        para.y = y
     }
 
     private fun updateSize(minimize: Boolean) {
         val size = if (minimize) WRAP_CONTENT else MATCH_PARENT
         para.width = size
         para.height = size
+        para.flags = if (minimize) FLAG_NOT_FOCUSABLE else FLAG_WATCH_OUTSIDE_TOUCH
     }
 
     private fun getLayoutParams(minimize: Boolean): WindowManager.LayoutParams {

@@ -15,17 +15,24 @@ import kotlinx.android.synthetic.main.view_bubble.view.*
 class BubbleView : ConstraintLayout {
 
     interface OnBubbleActionListener {
+
+        fun onBubbleDragStart(x: Int, y: Int)
+
+        fun onBubbleDragEnd()
+
         fun onBubbleMinimize(minimize: Boolean)
 
         fun onBubbleMove(x: Int, y: Int)
+
     }
 
     private var baseCount: Int = -1
     private var newCount: Int = -1
     private var isMinimize = true
-    private var bubbleActionListener: OnBubbleActionListener? = null
+    private lateinit var bubbleActionListener: OnBubbleActionListener
     private var startX: Int = 0
     private var startY: Int = 0
+    private var radius = (32 * resources.displayMetrics.density).toInt()
 
     constructor(context: Context) : super(context)
 
@@ -42,22 +49,29 @@ class BubbleView : ConstraintLayout {
         setOnClickListener {
             setMinimize(!isMinimize)
         }
-        setOnTouchListener { v, event ->
+        setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    Log.e("jintin", "touch donw")
-                    startX = event.x.toInt()
-                    startY = event.y.toInt()
+                    startX = event.rawX.toInt()
+                    startY = event.rawY.toInt()
+                    bubbleActionListener.onBubbleDragStart(
+                        startX - event.x.toInt() + radius,
+                        startY - event.y.toInt() + radius
+                    )
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    Log.e("jintin", "touch move")
-                    bubbleActionListener?.onBubbleMove(event.x.toInt() - startX, event.y.toInt() - startY)
-                    startX = event.x.toInt()
-                    startY = event.y.toInt()
+                    bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
+                }
+                MotionEvent.ACTION_UP,
+                MotionEvent.ACTION_CANCEL -> {
+                    if (Math.abs(event.rawX.toInt() - startX) + Math.abs(event.rawY.toInt() - startY) > 50) {
+                        bubbleActionListener.onBubbleDragEnd()
+                        return@setOnTouchListener true
+                    }
                 }
             }
 
-            false
+            return@setOnTouchListener false
         }
     }
 
