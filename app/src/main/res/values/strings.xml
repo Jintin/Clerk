@@ -17,4 +17,6 @@
     <string name="request_overlay_title">"Need DrawOverlays Permission"</string>
     <string name="request_overlay_message">""</string>
 
+    <string name="max_new_log">99+</string>
+
 </resources>
