@@ -2,7 +2,6 @@ package com.jintin.clerk.app.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -14,14 +13,29 @@ import kotlinx.android.synthetic.main.view_bubble.view.*
  */
 class BubbleView : ConstraintLayout {
 
+    /**
+     * Bubble action listener
+     */
     interface OnBubbleActionListener {
 
+        /**
+         * On drag start
+         */
         fun onBubbleDragStart(x: Int, y: Int)
 
+        /**
+         * On drag end
+         */
         fun onBubbleDragEnd()
 
+        /**
+         * On minimize
+         */
         fun onBubbleMinimize(minimize: Boolean)
 
+        /**
+         * On drag move
+         */
         fun onBubbleMove(x: Int, y: Int)
 
     }
@@ -44,6 +58,9 @@ class BubbleView : ConstraintLayout {
         View.inflate(context, R.layout.view_bubble, this)
     }
 
+    /**
+     * Set bubble action listener
+     */
     fun setOnBubbleActionListener(listener: OnBubbleActionListener) {
         bubbleActionListener = listener
         setOnClickListener {
@@ -75,6 +92,9 @@ class BubbleView : ConstraintLayout {
         }
     }
 
+    /**
+     * Set bubble count
+     */
     fun setCount(newCount: Int) {
         if (baseCount == -1) {
             baseCount = newCount
@@ -95,18 +115,23 @@ class BubbleView : ConstraintLayout {
         }
     }
 
+    /**
+     * Check if minimize or not
+     */
     fun isMinimize(): Boolean {
         return isMinimize
     }
 
+    /**
+     * Set minimize
+     */
     fun setMinimize(minimize: Boolean) {
         isMinimize = minimize
-        bubbleActionListener?.onBubbleMinimize(isMinimize)
+        bubbleActionListener.onBubbleMinimize(isMinimize)
         if (!minimize) {
             baseCount = newCount
             updateCount()
         }
-        Log.e("jintin", " touch")
     }
 
 }

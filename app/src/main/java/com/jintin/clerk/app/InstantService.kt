@@ -33,6 +33,7 @@ class InstantService : LifecycleService() {
 
     @Inject
     lateinit var viewModel: LogListViewModel
+    lateinit var para: WindowManager.LayoutParams
     private lateinit var windowManager: WindowManager
     private lateinit var component: ViewerComponent
     private var container: InstantLayout? = null
@@ -107,8 +108,6 @@ class InstantService : LifecycleService() {
             container = null
         }
     }
-
-    lateinit var para: WindowManager.LayoutParams
 
     private fun updateOffset(x: Int, y: Int) {
         para.x = x

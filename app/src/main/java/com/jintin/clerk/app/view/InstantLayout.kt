@@ -9,7 +9,9 @@ import com.jintin.clerk.app.R
 import com.jintin.clerk.app.obj.ClerkLog
 import kotlinx.android.synthetic.main.layout_instant.view.*
 
-
+/**
+ * Floating layout for logs
+ */
 class InstantLayout : ConstraintLayout {
 
     constructor(context: Context) : super(context)
@@ -40,6 +42,9 @@ class InstantLayout : ConstraintLayout {
         bubbleView.setCount(list.size)
     }
 
+    /**
+     * Set update listener
+     */
     fun setUpdateListener(listener: BubbleView.OnBubbleActionListener) {
         bubbleView.setOnBubbleActionListener(object : BubbleView.OnBubbleActionListener {
             override fun onBubbleDragStart(x: Int, y: Int) {
@@ -62,6 +67,9 @@ class InstantLayout : ConstraintLayout {
         })
     }
 
+    /**
+     * Check if minimize or not
+     */
     fun isMinimize(): Boolean {
         return bubbleView.isMinimize()
     }
