@@ -43,9 +43,9 @@ class InstantLayout : ConstraintLayout {
     }
 
     /**
-     * Set update listener
+     * Set bubble action listener
      */
-    fun setUpdateListener(listener: BubbleView.OnBubbleActionListener) {
+    fun setBubbleActionListener(listener: BubbleView.OnBubbleActionListener) {
         bubbleView.setOnBubbleActionListener(object : BubbleView.OnBubbleActionListener {
             override fun onBubbleDragStart(x: Int, y: Int) {
                 listener.onBubbleDragStart(x, y)

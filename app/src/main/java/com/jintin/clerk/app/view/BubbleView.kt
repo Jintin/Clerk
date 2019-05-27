@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.view_bubble.view.*
 /**
  * Bubble View for Clerk log
  */
-class BubbleView : ConstraintLayout {
+class BubbleView : ConstraintLayout, View.OnTouchListener {
 
     /**
      * Bubble action listener
@@ -56,6 +56,7 @@ class BubbleView : ConstraintLayout {
 
     init {
         View.inflate(context, R.layout.view_bubble, this)
+        setOnTouchListener(this)
     }
 
     /**
@@ -66,30 +67,31 @@ class BubbleView : ConstraintLayout {
         setOnClickListener {
             setMinimize(!isMinimize)
         }
-        setOnTouchListener { _, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    startX = event.rawX.toInt()
-                    startY = event.rawY.toInt()
-                    bubbleActionListener.onBubbleDragStart(
-                        startX - event.x.toInt() + radius,
-                        startY - event.y.toInt() + radius
-                    )
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
-                }
-                MotionEvent.ACTION_UP,
-                MotionEvent.ACTION_CANCEL -> {
-                    if (Math.abs(event.rawX.toInt() - startX) + Math.abs(event.rawY.toInt() - startY) > 50) {
-                        bubbleActionListener.onBubbleDragEnd()
-                        return@setOnTouchListener true
-                    }
+
+    }
+
+    override fun onTouch(v: View, event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                startX = event.rawX.toInt()
+                startY = event.rawY.toInt()
+                bubbleActionListener.onBubbleDragStart(
+                    startX - event.x.toInt() + radius,
+                    startY - event.y.toInt() + radius
+                )
+            }
+            MotionEvent.ACTION_MOVE -> {
+                bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
+            }
+            MotionEvent.ACTION_UP,
+            MotionEvent.ACTION_CANCEL -> {
+                if (Math.abs(event.rawX.toInt() - startX) + Math.abs(event.rawY.toInt() - startY) > 50) {
+                    bubbleActionListener.onBubbleDragEnd()
+                    return true
                 }
             }
-
-            return@setOnTouchListener false
         }
+        return false
     }
 
     /**

@@ -73,9 +73,18 @@ class InstantService : LifecycleService() {
         }
         setNotification()
         if (container == null) {
-            container = InstantLayout(applicationContext)
+            container = createInstantLayout()
+            para = getLayoutParams(true)
+            windowManager.addView(container, para)
+        } else {
+            updateSize(container?.isMinimize() == true)
+            windowManager.updateViewLayout(container, para)
+        }
+    }
 
-            container?.setUpdateListener(object : BubbleView.OnBubbleActionListener {
+    private fun createInstantLayout(): InstantLayout {
+        return InstantLayout(applicationContext).also {
+            it.setBubbleActionListener(object : BubbleView.OnBubbleActionListener {
                 override fun onBubbleDragStart(x: Int, y: Int) {
                     offsetX = x - para.x
                     offsetY = y - para.y
@@ -94,11 +103,6 @@ class InstantService : LifecycleService() {
                     windowManager.updateViewLayout(container, para)
                 }
             })
-            para = getLayoutParams(true)
-            windowManager.addView(container, para)
-        } else {
-            updateSize(container?.isMinimize() == true)
-            windowManager.updateViewLayout(container, para)
         }
     }
 
