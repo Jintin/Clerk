@@ -145,7 +145,6 @@ class InstantService : LifecycleService() {
         animator.interpolator = OvershootInterpolator(1.2f)
         animator.duration = 400
         animator.addUpdateListener { animation ->
-            animation.currentPlayTime
             (animation.animatedValue as? Int)?.let {
                 para.x = it
             }
