@@ -92,9 +92,7 @@ class BubbleView : ConstraintLayout, View.OnTouchListener {
                     startY - event.y.toInt()
                 )
             }
-            MotionEvent.ACTION_MOVE -> {
-                bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
-            }
+            MotionEvent.ACTION_MOVE -> bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
             MotionEvent.ACTION_UP,
             MotionEvent.ACTION_CANCEL -> {
                 if (Math.abs(event.rawX.toInt() - startX) + Math.abs(event.rawY.toInt() - startY) > 50) {

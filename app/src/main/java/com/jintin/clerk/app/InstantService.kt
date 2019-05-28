@@ -146,7 +146,9 @@ class InstantService : LifecycleService() {
         animator.duration = 400
         animator.addUpdateListener { animation ->
             animation.currentPlayTime
-            para.x = animation.animatedValue as Int
+            (animation.animatedValue as? Int)?.let {
+                para.x = it
+            }
             if (para.x < 0 || para.x > width - radius * 2) {
                 container?.setCountAlignment(moveToStart)
             }
