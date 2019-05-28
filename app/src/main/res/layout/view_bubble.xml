@@ -3,14 +3,15 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
         tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <ImageView
             android:id="@+id/bubble"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_height="@dimen/bubble_width"
+            android:layout_width="@dimen/bubble_width"
+            android:padding="2dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher_round"
             tools:ignore="ContentDescription"
@@ -22,18 +23,21 @@
 
     <TextView
             android:background="@drawable/bg_round_red"
+            android:gravity="center"
             android:id="@+id/count"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:minWidth="22sp"
             android:paddingBottom="2dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            android:paddingStart="4dp"
             android:paddingTop="2dp"
             android:textColor="@android:color/white"
+            android:textSize="12sp"
             tools:text="99+"
             app:layout_constraintCircle="@+id/bubble"
-            app:layout_constraintCircleAngle="45"
-            app:layout_constraintCircleRadius="32dp"
+            app:layout_constraintCircleAngle="315"
+            app:layout_constraintCircleRadius="@dimen/count_radius"
             />
 
 </merge>

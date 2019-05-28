@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.jintin.clerk.app.R
 import kotlinx.android.synthetic.main.view_bubble.view.*
 
+
 /**
  * Bubble View for Clerk log
  */
@@ -46,7 +47,6 @@ class BubbleView : ConstraintLayout, View.OnTouchListener {
     private lateinit var bubbleActionListener: OnBubbleActionListener
     private var startX: Int = 0
     private var startY: Int = 0
-    private var radius = (32 * resources.displayMetrics.density).toInt()
 
     constructor(context: Context) : super(context)
 
@@ -70,19 +70,29 @@ class BubbleView : ConstraintLayout, View.OnTouchListener {
 
     }
 
+    /**
+     * Set alignment of count text
+     */
+    fun setCountAlignment(moveToStart: Boolean) {
+        val para = count.layoutParams as? LayoutParams
+        para?.circleAngle = if (moveToStart) 45f else 315f
+        count.layoutParams = para
+    }
+
     override fun onTouch(v: View, event: MotionEvent): Boolean {
+        if (!isMinimize) {
+            return false
+        }
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 startX = event.rawX.toInt()
                 startY = event.rawY.toInt()
                 bubbleActionListener.onBubbleDragStart(
-                    startX - event.x.toInt() + radius,
-                    startY - event.y.toInt() + radius
+                    startX - event.x.toInt(),
+                    startY - event.y.toInt()
                 )
             }
-            MotionEvent.ACTION_MOVE -> {
-                bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
-            }
+            MotionEvent.ACTION_MOVE -> bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
             MotionEvent.ACTION_UP,
             MotionEvent.ACTION_CANCEL -> {
                 if (Math.abs(event.rawX.toInt() - startX) + Math.abs(event.rawY.toInt() - startY) > 50) {
@@ -129,11 +139,11 @@ class BubbleView : ConstraintLayout, View.OnTouchListener {
      */
     fun setMinimize(minimize: Boolean) {
         isMinimize = minimize
-        bubbleActionListener.onBubbleMinimize(isMinimize)
         if (!minimize) {
             baseCount = newCount
             updateCount()
         }
+        bubbleActionListener.onBubbleMinimize(isMinimize)
     }
 
 }

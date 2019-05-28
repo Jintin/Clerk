@@ -8,6 +8,7 @@
     <string name="auto_scroll">Auto scroll</string>
     <string name="auto_scroll_summary">Auto scroll to latest log</string>
     <string name="instant_log">Instant Log</string>
+    <string name="click_to_stop">Click to Stop</string>
     <string name="instant_log_summary">Show log screen when receive Log</string>
     <string name="about">About</string>
     <string name="github">View on GitHub</string>
