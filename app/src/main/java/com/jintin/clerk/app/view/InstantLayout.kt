@@ -68,6 +68,13 @@ class InstantLayout : ConstraintLayout {
     }
 
     /**
+     * Set alignment of count text
+     */
+    fun setCountAlignment(moveToStart: Boolean) {
+        bubbleView.setCountAlignment(moveToStart)
+    }
+
+    /**
      * Check if minimize or not
      */
     fun isMinimize(): Boolean {

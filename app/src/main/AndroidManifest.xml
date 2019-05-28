@@ -1,19 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.jintin.clerk.app">
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
-            android:name=".ClerkApp"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
+            android:name=".ClerkApp"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".ui.MainActivity"
-                android:label="@string/app_name">
+                android:label="@string/app_name"
+                android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -21,16 +22,18 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.setting.SettingActivity"
-                android:label="@string/action_settings"/>
+                android:label="@string/action_settings"
+                android:name=".ui.setting.SettingActivity"/>
+
         <receiver
-                android:name=".LogReceiver"
                 android:enabled="true"
-                android:exported="true">
+                android:exported="true"
+                android:name=".LogReceiver">
             <intent-filter>
                 <action android:name="com.jintin.clerk.LOG_ACTION"/>
             </intent-filter>
         </receiver>
+
         <service
                 android:name=".LogService"
                 android:permission="android.permission.BIND_JOB_SERVICE"/>
