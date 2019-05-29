@@ -1,6 +1,7 @@
 # Clerk
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/60b7174503e047ae82202081ada2d9ee)](https://app.codacy.com/app/Jintin/Clerk?utm_source=github.com&utm_medium=referral&utm_content=Jintin/Clerk&utm_campaign=Badge_Grade_Dashboard)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ebee76105bbc0c162fd1/maintainability)](https://codeclimate.com/github/Jintin/Clerk/maintainability)
 [![Build Status](https://travis-ci.org/Jintin/Clerk.svg?branch=master)](https://travis-ci.org/Jintin/Clerk)
 
 Clerk is a log service to collect and display your app log on Android devices.
