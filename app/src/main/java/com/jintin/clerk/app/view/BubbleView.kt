@@ -123,7 +123,7 @@ class BubbleView : ConstraintLayout, View.OnTouchListener {
             } else {
                 count.text = context.getString(R.string.max_new_log)
             }
-            count.visibility = if (it == 0) View.INVISIBLE else View.VISIBLE
+            count.visibility = if (it == 0 || !isMinimize) View.INVISIBLE else View.VISIBLE
         }
     }
 
