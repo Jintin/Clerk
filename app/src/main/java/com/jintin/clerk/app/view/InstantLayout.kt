@@ -80,5 +80,4 @@ class InstantLayout : ConstraintLayout {
     fun isMinimize(): Boolean {
         return bubbleView.isMinimize()
     }
-
 }
