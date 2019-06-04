@@ -113,6 +113,9 @@ class BubbleView : ConstraintLayout, View.OnTouchListener {
         }
 
         this.newCount = newCount
+        if (!isMinimize) {
+            baseCount = newCount
+        }
         updateCount()
     }
 
