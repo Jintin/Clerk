@@ -10,9 +10,9 @@ import android.graphics.PixelFormat
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.O
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.*
 import android.view.animation.OvershootInterpolator
@@ -100,7 +100,7 @@ class InstantService : LifecycleService() {
         if (container == null) {
             container = createInstantLayout()
             para = getLayoutParams(true)
-            para.x = (width - radius * 1.8).toInt()
+//            para.x = (width - radius * 1.8).toInt()
             windowManager.addView(container, para)
         } else {
             updateSize(container?.isMinimize() == true)
@@ -128,9 +128,9 @@ class InstantService : LifecycleService() {
                 override fun onBubbleMove(x: Int, y: Int) {
                     lastX = para.x
                     lastY = para.y
-                    para.x = x - offsetX
-                    para.y = y - offsetY
-
+//                    para.x = x - offsetX
+//                    para.y = y - offsetY
+                    Log.e("jintin", "move " + x + ":" + y)
                     windowManager.updateViewLayout(container, para)
                 }
             })
@@ -146,7 +146,7 @@ class InstantService : LifecycleService() {
         animator.duration = 400
         animator.addUpdateListener { animation ->
             (animation.animatedValue as? Int)?.let {
-                para.x = it
+                //                para.x = it
             }
             if (para.x < 0 || para.x > width - radius * 2) {
                 container?.setCountAlignment(moveToStart)
@@ -171,10 +171,11 @@ class InstantService : LifecycleService() {
     }
 
     private fun updateSize(minimize: Boolean) {
-        val size = if (minimize) WRAP_CONTENT else MATCH_PARENT
+        val size = //if (minimize) WRAP_CONTENT else
+            MATCH_PARENT
         para.width = size
         para.height = size
-        para.flags = if (minimize) FLAG_LAYOUT_NO_LIMITS or FLAG_NOT_FOCUSABLE else FLAG_WATCH_OUTSIDE_TOUCH
+        para.flags = if (minimize) FLAG_LAYOUT_NO_LIMITS or FLAG_NOT_FOCUSABLE or FLAG_NOT_TOUCHABLE else 0
     }
 
     private fun getLayoutParams(minimize: Boolean): WindowManager.LayoutParams {
@@ -184,9 +185,10 @@ class InstantService : LifecycleService() {
             @Suppress("DEPRECATION")
             TYPE_PHONE
         }
-        val size = if (minimize) WRAP_CONTENT else MATCH_PARENT
-        val flags =
-            FLAG_LAYOUT_NO_LIMITS or if (container?.isMinimize() == true) FLAG_NOT_FOCUSABLE else FLAG_WATCH_OUTSIDE_TOUCH
+        val size =// if (minimize) WRAP_CONTENT else
+            MATCH_PARENT
+        val flags = if (minimize) FLAG_LAYOUT_NO_LIMITS or FLAG_NOT_FOCUSABLE or FLAG_NOT_TOUCHABLE else 0
+//            FLAG_LAYOUT_NO_LIMITS or if (container?.isMinimize() == true) FLAG_NOT_FOCUSABLE else FLAG_WATCH_OUTSIDE_TOUCH
 
         val para = WindowManager.LayoutParams(size, size, type, flags, PixelFormat.TRANSLUCENT)
 

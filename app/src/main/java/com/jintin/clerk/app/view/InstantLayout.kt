@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.jintin.clerk.app.R
 import com.jintin.clerk.app.obj.ClerkLog
 import kotlinx.android.synthetic.main.layout_instant.view.*
+
 
 /**
  * Floating layout for logs
@@ -21,7 +21,7 @@ class InstantLayout : ConstraintLayout {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     init {
-        View.inflate(context, R.layout.layout_instant, this)
+        View.inflate(context, com.jintin.clerk.app.R.layout.layout_instant, this)
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -49,10 +49,12 @@ class InstantLayout : ConstraintLayout {
         bubbleView.setOnBubbleActionListener(object : BubbleView.OnBubbleActionListener {
             override fun onBubbleDragStart(x: Int, y: Int) {
                 listener.onBubbleDragStart(x, y)
+                showCloseView(true)
             }
 
             override fun onBubbleDragEnd() {
                 listener.onBubbleDragEnd()
+                showCloseView(false)
             }
 
             override fun onBubbleMinimize(minimize: Boolean) {
@@ -62,9 +64,14 @@ class InstantLayout : ConstraintLayout {
 
             override fun onBubbleMove(x: Int, y: Int) {
                 listener.onBubbleMove(x, y)
+                bubbleView.setPadding(x, y, 0, 0)
             }
 
         })
+    }
+
+    private fun showCloseView(isShow: Boolean) {
+        closeView.show(isShow)
     }
 
     /**

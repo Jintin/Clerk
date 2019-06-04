@@ -25,4 +25,14 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
     </com.jintin.clerk.app.view.VirtualView>
+
+    <com.jintin.clerk.app.view.CloseView
+            android:id="@+id/closeView"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+    </com.jintin.clerk.app.view.CloseView>
 </androidx.constraintlayout.widget.ConstraintLayout>
