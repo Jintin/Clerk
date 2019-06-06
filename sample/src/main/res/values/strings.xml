@@ -6,4 +6,10 @@
     <string name="send_log">Send Log</string>
     <string name="start_tick">Start Tick</string>
     <string name="stop_tick">Stop Tick</string>
+    <string name="send_verbose">Send Verbose</string>
+    <string name="send_debug">Send Debug</string>
+    <string name="send_info">Send Info</string>
+    <string name="send_warn">Send Warn</string>
+    <string name="send_error">Send Error</string>
+
 </resources>

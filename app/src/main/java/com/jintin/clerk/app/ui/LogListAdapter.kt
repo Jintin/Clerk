@@ -1,11 +1,14 @@
 package com.jintin.clerk.app.ui
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.jintin.clerk.app.R
 import com.jintin.clerk.app.obj.ClerkLog
+import com.jintin.clerk.lib.LogType
 import kotlinx.android.synthetic.main.adapter_log.view.*
 
 /**
@@ -44,14 +47,18 @@ class LogListAdapter : RecyclerView.Adapter<LogListAdapter.LogViewHolder>() {
          * Bind ClerkLog with View
          */
         fun bind(clerkLog: ClerkLog) {
+            val type = LogType.values().find { it.ordinal == clerkLog.logType }
+
             if (clerkLog.channel.isEmpty()) {
                 itemView.channelView.visibility = View.GONE
             } else {
                 itemView.channelView.text = clerkLog.channel
                 itemView.channelView.visibility = View.VISIBLE
+                type?.let { itemView.channelView.setTextColor(Color.parseColor(it.color)) }
             }
 
             itemView.textView.text = clerkLog.log
+            type?.let { itemView.textView.setTextColor(Color.parseColor(it.color)) }
         }
 
     }

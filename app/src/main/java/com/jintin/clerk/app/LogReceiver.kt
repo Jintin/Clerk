@@ -9,6 +9,7 @@ import com.jintin.clerk.app.utils.getBool
 import com.jintin.clerk.app.utils.hasOverlayPermission
 import com.jintin.clerk.app.utils.startForegroundService
 import com.jintin.clerk.lib.ClerkUtils
+import com.jintin.clerk.lib.LogType
 
 /**
  * LogReceiver to listen incoming logs
@@ -21,10 +22,11 @@ class LogReceiver : BroadcastReceiver() {
                 val app = intent.getStringExtra(ClerkUtils.EXTRA_APP)
                 val channel = intent.getStringExtra(ClerkUtils.EXTRA_CHANNEL) ?: ""
                 val string = intent.getStringExtra(ClerkUtils.EXTRA_DATA)
+                val type = intent.getIntExtra(ClerkUtils.EXTRA_TYPE, LogType.NONE.ordinal)
                 if (app == null || string == null) {
                     return
                 }
-                val clerkLog = ClerkLog(app = app, channel = channel, log = string)
+                val clerkLog = ClerkLog(app = app, channel = channel, log = string, logType = type)
                 context?.apply {
                     if (hasOverlayPermission() && getBool(PrefKey.DRAW_OVERLAY)) {
                         startInstantService(this)

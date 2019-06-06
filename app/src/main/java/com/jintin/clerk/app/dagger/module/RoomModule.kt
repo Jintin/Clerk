@@ -3,6 +3,7 @@ package com.jintin.clerk.app.dagger.module
 import android.app.Application
 import androidx.room.Room
 import com.jintin.clerk.app.obj.ClerkLogDatabase
+import com.jintin.clerk.app.obj.ClerkMigration
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -14,7 +15,9 @@ import javax.inject.Singleton
 class RoomModule(application: Application) {
 
     private var database: ClerkLogDatabase =
-        Room.databaseBuilder(application, ClerkLogDatabase::class.java, "log-db").build()
+        Room.databaseBuilder(application, ClerkLogDatabase::class.java, "log-db")
+            .addMigrations(*ClerkMigration.getMigrations())
+            .build()
 
     /**
      * Provide ClerkLogDatabase

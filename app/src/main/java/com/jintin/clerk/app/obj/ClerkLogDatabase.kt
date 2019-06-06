@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 /**
  * ClerkLogDatabase for RoomDatabase
  */
-@Database(entities = [ClerkLog::class], version = 1, exportSchema = false)
+@Database(entities = [ClerkLog::class], version = 2, exportSchema = false)
 abstract class ClerkLogDatabase : RoomDatabase() {
 
     /**

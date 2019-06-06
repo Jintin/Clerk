@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         model.getTickEvent().observeForever {
-            ClerkUtils.log(channelText.text.toString(), logText.text.toString() + it)
+            ClerkUtils.d(channel = channelText.text.toString(), text = logText.text.toString() + it)
 //            // This one also work
-//            ClerkUtils.log(this, channelText.text.toString(), logText.text.toString() + it)
+//            ClerkUtils.d(this, channelText.text.toString(), logText.text.toString() + it)
         }
 
         tick.setOnClickListener {
@@ -33,9 +33,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         send.setOnClickListener {
-            ClerkUtils.log(channelText.text.toString(), logText.text.toString())
+            ClerkUtils.e(channel = channelText.text.toString(), text = logText.text.toString())
 //            // This one also work
-//            ClerkUtils.log(this, channelText.text.toString(), logText.text.toString())
+//            ClerkUtils.e(this, channelText.text.toString(), logText.text.toString())
+        }
+
+        verbose.setOnClickListener {
+            ClerkUtils.v(channel = "VERBOSE:", text = "TEST_VERBOSE")
+        }
+        debug.setOnClickListener {
+            ClerkUtils.d(channel = "DEBUG:", text = "TEST_DEBUG")
+        }
+        info.setOnClickListener {
+            ClerkUtils.i(channel = "INFO:", text = "TEST_INFO")
+        }
+        warn.setOnClickListener {
+            ClerkUtils.w(channel = "WARN:", text = "TEST_WARN")
+        }
+        error.setOnClickListener {
+            ClerkUtils.e(channel = "ERROR:", text = "TEST_ERROR")
         }
     }
 }

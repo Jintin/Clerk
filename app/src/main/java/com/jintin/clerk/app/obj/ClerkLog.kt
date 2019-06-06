@@ -15,5 +15,6 @@ data class ClerkLog(
     val id: Long = 0,
     val app: String,
     val channel: String,
-    val log: String
+    val log: String,
+    val logType: Int
 ) : Parcelable
