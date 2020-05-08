@@ -18,7 +18,6 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
 import com.jintin.clerk.app.dagger.component.ViewerComponent
-import com.jintin.clerk.app.obj.ClerkLog
 import com.jintin.clerk.app.utils.PrefKey
 import com.jintin.clerk.app.utils.getSystemManager
 import com.jintin.clerk.app.utils.hasOverlayPermission
@@ -64,7 +63,7 @@ class InstantService : LifecycleService() {
         windowManager = getSystemManager(WINDOW_SERVICE)
         component = ViewerComponent.init()
         component.inject(this)
-        viewModel.getList().observe(this, Observer<List<ClerkLog>> {
+        viewModel.getList().observe(this, Observer {
             container?.setData(it)
         })
         createOverlay()
@@ -191,16 +190,17 @@ class InstantService : LifecycleService() {
 
     private fun createNotificationChannel() {
         if (SDK_INT >= O) {
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            if (notificationManager.getNotificationChannel(PrefKey.DRAW_OVERLAY) == null) {
-                val notificationChannel =
-                    NotificationChannel(
-                        PrefKey.DRAW_OVERLAY,
-                        getString(R.string.instant_log),
-                        NotificationManager.IMPORTANCE_LOW
-                    )
-                notificationChannel.description = getString(R.string.instant_log)
-                notificationManager.createNotificationChannel(notificationChannel)
+            getSystemService(NotificationManager::class.java)?.apply {
+                if (getNotificationChannel(PrefKey.DRAW_OVERLAY) == null) {
+                    val notificationChannel =
+                        NotificationChannel(
+                            PrefKey.DRAW_OVERLAY,
+                            getString(R.string.instant_log),
+                            NotificationManager.IMPORTANCE_LOW
+                        )
+                    notificationChannel.description = getString(R.string.instant_log)
+                    createNotificationChannel(notificationChannel)
+                }
             }
         }
     }
@@ -209,7 +209,8 @@ class InstantService : LifecycleService() {
         createNotificationChannel()
         val intent = Intent(this, InstantService::class.java)
         intent.putExtra(ACTION_STOP, true)
-        val pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent =
+            PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notification = NotificationCompat.Builder(this, PrefKey.DRAW_OVERLAY)
             .setWhen(0)
