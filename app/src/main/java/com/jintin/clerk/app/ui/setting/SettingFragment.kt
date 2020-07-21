@@ -19,7 +19,8 @@ import com.jintin.clerk.app.utils.hasOverlayPermission
 /**
  * SettingFragment
  */
-class SettingFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingFragment : PreferenceFragmentCompat(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     companion object {
         private const val OVERLAY_PERMISSION = 222
@@ -80,7 +81,7 @@ class SettingFragment : PreferenceFragmentCompat(), SharedPreferences.OnSharedPr
             .setTitle(R.string.request_overlay_title)
             .setMessage(R.string.request_overlay_message)
             .setOnCancelListener { turnOffDrawOverlay() }
-            .setNegativeButton(android.R.string.no) { _, _ -> turnOffDrawOverlay() }
+            .setNegativeButton(android.R.string.cancel) { _, _ -> turnOffDrawOverlay() }
             .setPositiveButton(android.R.string.ok) { _, _ -> launchOverlayPage(context) }
             .show()
     }
