@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.jintin.clerk.app.R
 import kotlinx.android.synthetic.main.view_bubble.view.*
+import kotlin.math.abs
 
 
 /**
@@ -95,7 +96,7 @@ class BubbleView : ConstraintLayout, View.OnTouchListener {
             MotionEvent.ACTION_MOVE -> bubbleActionListener.onBubbleMove(event.rawX.toInt(), event.rawY.toInt())
             MotionEvent.ACTION_UP,
             MotionEvent.ACTION_CANCEL -> {
-                if (Math.abs(event.rawX.toInt() - startX) + Math.abs(event.rawY.toInt() - startY) > 50) {
+                if (abs(event.rawX.toInt() - startX) + Math.abs(event.rawY.toInt() - startY) > 50) {
                     bubbleActionListener.onBubbleDragEnd()
                     return true
                 }
